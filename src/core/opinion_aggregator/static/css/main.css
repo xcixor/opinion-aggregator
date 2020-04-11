@@ -1,0 +1,54 @@
+.brand-logo {
+    font-size: 1.6rem !important;
+}
+
+.dropdown-content {
+    width: 250px !important;
+    height: auto !important;
+}
+
+.btn {
+    background: #4CAF50 !important;
+}
+
+.green-text {
+    color: #4CAF50 !important;
+}
+
+.mobile-bar {
+    padding: 0 32px;
+    position: relative;
+}
+
+.above-input {
+    bottom: 0.8em;
+    position: absolute;
+}
+
+.search {
+    margin-bottom: 0 !important;
+    height: 2em !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.auth {
+    padding: 0 22px;
+}
+
+@media only screen and (max-width: 767px) {
+    .brand-logo {
+        /* left: 45% !important; */
+        text-align: center;
+        font-size: 95% !important;
+    }
+    .sidenav {
+        /* padding-top: 50px !important; */
+    }
+}

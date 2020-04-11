@@ -1,11 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaping the future of UAE</title>
+
+    <title>
+    {% block head %}
+        Shaping the future of UAE
+    {% endblock %}
+    </title>
+    {% block styles %}
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    {% endblock %}
 </head>
 <body>
-    <h1>Shaping the future of UAE</h1>
+{% block messages %}
+    {% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+<header>
+    <ul id="dropdown" class="dropdown-content">
+        <div class="row">
+            <h4 class="green-text center">Login</h4>
+        </div>
+        <form action="#!">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <label for="first_name">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Register
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ul>
+    <nav class="white">
+        <div class="container">
+            <a href="#!" class="brand-logo green-text">Shaping The Future of UAE</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
+            <div class="nav-wrapper hide-on-med-and-down">
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#!" class="green-text">About</a></li>
+                    <li><a href="#!" class="green-text">Information and services</a></li>
+                    <li><a href="#!" class="green-text">Other Languages</a></li>
+                    <li><a class="dropdown-trigger green-text" href="#!" data-target="dropdown">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li class="mobile-bar">
+            <form>
+                <div class="input-field">
+                  <i class="material-icons above-input close" id="close">close</i>
+                  <input id="search" type="search" required id="search">
+                  <i class="material-icons">search</i>
+                </div>
+              </form>
+        </li>
+        <li><a href="#!" class="green-text">About</a></li>
+        <li><a href="#!" class="green-text">Information and services</a></li>
+        <li><a href="#!" class="green-text">Other Languages</a></li>
+        <li><a class="green-text" href="#!" id="dropDownForm">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
+        <form action="#!" class="hidden auth">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <label for="first_name">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Register
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ul>
+</header>
+{% endblock %}
+{% block content %}
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+{% endblock %}
 </body>
 </html>
