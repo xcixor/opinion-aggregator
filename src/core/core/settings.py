@@ -25,7 +25,9 @@ SECRET_KEY = 'x$1yb&dh5#yho=$!1+o0ght62suo=kdd7hyg5d&6d6jwv!^hvv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'opinion-aggregator.herokuapp.com'
+]
 
 
 # Application definition
