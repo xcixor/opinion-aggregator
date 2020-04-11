@@ -67,6 +67,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#!" class="green-text">About</a></li>
                     <li><a href="#!" class="green-text">Information and services</a></li>
+                    <li><a href="#!" class="green-text">Your Voice</a></li>
                     <li><a href="#!" class="green-text">Other Languages</a></li>
                     <li><a class="dropdown-trigger green-text" href="#!" data-target="dropdown">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
                 </ul>
@@ -85,6 +86,7 @@
         </li>
         <li><a href="#!" class="green-text">About</a></li>
         <li><a href="#!" class="green-text">Information and services</a></li>
+        <li><a href="#!" class="green-text">Your Voice</a></li>
         <li><a href="#!" class="green-text">Other Languages</a></li>
         <li><a class="green-text" href="#!" id="dropDownForm">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
         <form action="#!" class="hidden auth">
@@ -118,7 +120,22 @@
 {% endblock %}
 {% block content %}
 
-
+{% endblock %}
+{% block footer %}
+<div class="row footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <a href="#!" class="white-text">About</a>
+                <a href="#!" class="white-text">Information and services</a>
+            </div>
+            <div class="col s6">
+                <a href="#!" class="white-text">Your Voice</a>
+                <a href="#!" class="white-text">Other Languages</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>

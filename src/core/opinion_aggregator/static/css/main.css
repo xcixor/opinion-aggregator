@@ -42,9 +42,30 @@
     padding: 0 22px;
 }
 
+.footer {
+    height: 200px;
+    background-color: #263238 ;
+    margin-bottom: 0 !important;
+}
+
+.footer .s6 {
+    display: flex;
+    flex-direction: column;
+    height: 200px !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer .s6 a {
+    width: 40%;
+}
+
+.footer .row {
+    margin-bottom: 0 !important;
+}
+
 @media only screen and (max-width: 767px) {
     .brand-logo {
-        /* left: 45% !important; */
         text-align: center;
         font-size: 95% !important;
     }

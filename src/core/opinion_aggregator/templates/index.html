@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="row bg-img">
+    <div class="splash">
+    </div>
+</div>
+<div class="welcome">
+    <h2 class="white-text">Shaping the Future of UAE</h2>
+    <p class="white-text">
+        Bringing ideas together to
+        plan for, and create a better future for the youth of the emirates.
+    </p>
+    <button class="btn waves-effect waves-light start-now" type="submit" name="action">Start now
+    </button>
+</div>
+<div class="row main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col m12 s12 center">
+                <h4 class="headline">Youth</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m4 s12 center widget">
+                <i class="far fa-user-circle green-text fa-6x"></i>
+                <p>Create a profile</p>
+            </div>
+            <div class="col m4 s12 center widget">
+                <i class="fas fa-share green-text fa-6x"></i>
+                <p>Share your opinions</p>
+            </div>
+            <div class="col m4 s12 center widget">
+                <i class="fas fa-comments green-text fa-6x"></i>
+                <p>Get feedback</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12 s12 center">
+                <h4 class="headline">Government</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m4 s12 center widget">
+                <i class="fas fa-clipboard green-text fa-6x"></i>
+                <p>Gather data</p>
+            </div>
+            <div class="col m4 s12 center widget">
+                <i class="fas fa-chart-bar green-text fa-6x"></i>
+
+                <p>Analyse</p>
+            </div>
+            <div class="col m4 s12 center widget">
+                <i class="fas fa-user-graduate green-text fa-6x"></i>
+                <p>Shape our future</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

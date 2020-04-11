@@ -1,0 +1,74 @@
+.splash {
+    height: 600px;
+    background-image: url('../images/city.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    position: relative;
+    transform: scale(1.01);
+}
+
+.bg-img {
+    overflow: hidden;
+
+}
+
+.m4 p {
+    font-size: 1.4em;
+}
+
+.welcome {
+    margin-top: 50px;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.4);
+    border-radius: 5px;
+    position: absolute !important;
+    z-index: 2 !important;
+    padding: 10px;
+    top: 50px;
+    left: 15%;
+    width: 50% !important;
+    font-size: 1.4em;
+}
+
+.welcome-container {
+    position: relative;
+}
+
+.start-now {
+    background: #4CAF50;
+    padding: 12px 8px;
+    height: auto !important;
+}
+
+.main-content {
+    margin-top: 50px;
+}
+
+.widget {
+    padding: 10px !important;
+}
+
+.widget:hover {
+    border: 0.02em solid #E8E8E8;
+}
+
+@media only screen and (max-width: 767px) {
+    .welcome {
+        width: 100% !important;
+        left: 0;
+        top: 5px;
+    }
+    .headline {
+        padding-left: 0 !important;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .headline {
+        padding-left: 30% !important;
+    }
+}

@@ -8,4 +8,4 @@ def index(request):
     Arguments:
         request {object} -- django http object
     """
-    return render(request, 'base.html')
+    return render(request, 'index.html')
