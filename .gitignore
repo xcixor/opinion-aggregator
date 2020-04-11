@@ -1,0 +1,5 @@
+src/core/opinion_aggregator/staticfiles/admin
+src/core/opinion_aggregator/staticfiles/css
+src/core/opinion_aggregator/staticfiles/images
+src/core/opinion_aggregator/staticfiles/js
+src/core/opinion_aggregator/staticfiles/staticfiles.json
