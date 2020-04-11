@@ -26,7 +26,10 @@ SECRET_KEY = 'x$1yb&dh5#yho=$!1+o0ght62suo=kdd7hyg5d&6d6jwv!^hvv'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'opinion-aggregator.herokuapp.com'
+    '127.0.0.1',
+    '0.0.0.0',
+    'localhost',
+    'opinion-aggregator.herokuapp.com',
 ]
 
 
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -122,5 +126,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_DIR = BASE_DIR[:-4]
-STATIC_ROOT = os.path.join(BASE_DIR, 'opinion_aggregator/staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'opinion_aggregator/staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 STATICFILES_STORAGE = 'django_forgiving_collectstatic.storages.ForgivingManifestStaticFilesStorage'
