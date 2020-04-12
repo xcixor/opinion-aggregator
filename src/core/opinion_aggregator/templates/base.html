@@ -4,6 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/logo.svg' %}" type="image/gif" sizes="16x16">
 
     <title>
     {% block head %}
@@ -47,21 +48,17 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Login
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <a class="waves-effect waves-light btn" href="#!">Login</a>
                 </div>
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Register
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
         </form>
     </ul>
     <nav class="white">
         <div class="container">
-            <a href="#!" class="brand-logo green-text">Shaping The Future of UAE</a>
+            <a href="/" class="brand-logo green-text uae-logo"><img src="{% static '/images/logo.svg' %}">Shaping The Future of UAE</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
             <div class="nav-wrapper hide-on-med-and-down">
                 <ul class="right hide-on-med-and-down">
@@ -104,14 +101,10 @@
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Login
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <a class="waves-effect waves-light btn" href="#!">Login</a>
                 </div>
                 <div class="input-field col s6">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Register
-                        <i class="material-icons right">send</i>
-                    </button>
+                    <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
         </form>
@@ -122,7 +115,7 @@
 
 {% endblock %}
 {% block footer %}
-<div class="row footer">
+<div class="footer">
     <div class="container">
         <div class="row">
             <div class="col s6">

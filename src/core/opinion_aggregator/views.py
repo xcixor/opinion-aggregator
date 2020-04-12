@@ -9,3 +9,12 @@ def index(request):
         request {object} -- django http object
     """
     return render(request, 'index.html')
+
+
+def registration(request):
+    """renders the registration page
+
+    Arguments:
+        request {object} -- django http object
+    """
+    return render(request, 'registration.html')

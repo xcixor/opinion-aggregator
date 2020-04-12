@@ -10,7 +10,38 @@ $(document).ready(function(){
       $('.sidenav').sidenav('close');
       $('.hidden').addClass('hidden');
      });
+
+     $('.datepicker').datepicker({
+       'maxDate': new Date(2007, 01, 01),
+       'onOpen': hideAvatar,
+       'onClose': displayAvatar,
+       'autoClose': false,
+       'showClearBtn': true
+     });
+
+    //  $('.datepicker').on('click', hideAvatar);
+
+     $('select').formSelect();
   });
+
+$(document).click(function(event) {
+  $target = $(event.target);
+  if(!$target.closest('.datepicker').length &&
+  $('.datepicker').is(":visible")) {
+    // $('.modal').modal({'dismissible':false});
+  }
+  // else {
+  //   hideAvatar();
+  // }
+});
+
+function hideAvatar(){
+  $('.avatar').css({'display': 'none'});
+}
+
+function displayAvatar(){
+  $('.avatar').css({'display': 'flex'});
+}
 
 $('#search').on('focus', function(){
   $('.above-input').css('display', 'none');

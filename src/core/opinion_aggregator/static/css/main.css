@@ -1,9 +1,32 @@
+body, html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
 .brand-logo {
     font-size: 1.6rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.uae-logo img {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+    box-shadow: 0px 0px 0px 4px #DCDCDC;
+    margin-right: 5px;
 }
 
 .dropdown-content {
-    width: 250px !important;
+    width: 300px !important;
     height: auto !important;
 }
 
@@ -43,6 +66,7 @@
 }
 
 .footer {
+    flex-shrink: 0;
     height: 200px;
     background-color: #263238 ;
     margin-bottom: 0 !important;
@@ -64,12 +88,10 @@
     margin-bottom: 0 !important;
 }
 
+
 @media only screen and (max-width: 767px) {
     .brand-logo {
         text-align: center;
-        font-size: 95% !important;
-    }
-    .sidenav {
-        /* padding-top: 50px !important; */
+        font-size: 80% !important;
     }
 }
