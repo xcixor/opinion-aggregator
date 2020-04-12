@@ -126,9 +126,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_DIR = BASE_DIR[:-4]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'opinion_aggregator/staticfiles')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 STATICFILES_STORAGE = 'django_forgiving_collectstatic.storages.ForgivingManifestStaticFilesStorage'
+LOGIN_URL = '/login'
+AUTH_USER_MODEL = 'opinion_aggregator.User'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

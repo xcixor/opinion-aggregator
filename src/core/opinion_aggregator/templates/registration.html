@@ -14,80 +14,152 @@
         </div>
         <div class="container z-depth-3">
             <div class="row registration-form">
-                <form class="col s12">
-                <div class="row center avatar">
+
+              <form class="col s12" method="POST">
+                {% csrf_token %}
+                <div class="row avatar-container">
+                  <div class="avatar z-depth-1">
                     <i class="fas fa-user-circle orange-text fa-9x"></i>
+                  </div>
                 </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input placeholder="First Name" id="first_name" type="text" class="validate" required>
-                      <label for="first_name">First Name</label>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input name="firstname" placeholder="First Name" id="first_name" type="text" class="validate" required>
+                    <label for="first_name">First Name</label>
+                    {% if form.firstname.errors %}
+                    {% for error in form.firstname.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
                     </div>
-                    <div class="input-field col s6">
-                      <input placeholder="Last Name" id="last_name" type="text" class="validate" required>
-                      <label for="last_name">Last Name</label>
-                    </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input placeholder="Email" id="email" type="email" class="validate">
-                      <label for="email">Email</label>
+                  <div class="input-field col s6">
+                    <input name="lastname" placeholder="Last Name" id="last_name" type="text" class="validate" required>
+                    <label for="last_name">Last Name</label>
+                    {% if form.lastname.errors %}
+                    {% for error in form.lastname.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                        <select>
-                            <option value="" disabled selected>Gender</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">I would rather not say</option>
-                        </select>
-                        <label>Gender</label>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="email" placeholder="Email" id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                    {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="row date-row">
-                    <div class="input-field col s12">
-                        <input placeholder="Date of Birth: before 2007-01-01" type="text" class="datepicker">
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>Your Photo</span>
+                        <input type="file" name="photo">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                      </div>
                     </div>
+                    {% if form.photo.errors %}
+                    {% for error in form.photo.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="row">
-                    <div class="input-field col s4">
-                        <select>
-                            <option value="1" selected>+971</option>
-                        </select>
-                        <label>Country code</label>
-                    </div>
-                    <div class="input-field col s8">
-                      <input value="Phone Number" id="disabled" type="text" class="validate">
-                      <label for="disabled">Phone Number</label>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                      <select>
+                          <option value="1" selected>Male</option>
+                          <option value="2">Female</option>
+                          <option value="3">I would rather not say</option>
+                      </select>
+                      <label>Gender</label>
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input value="Address" id="disabled" type="text" class="validate">
-                      <label for="disabled">Address</label>
-                    </div>
+                </div>
+                <div class="row date-row">
+                  <div class="input-field col s12">
+                      <input name="date_of_birth" placeholder="Date of Birth: before 2007-01-01" type="text" class="datepicker">
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
-                      <label for="password">Password</label>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s4">
+                      <select>
+                          <option value="1" selected>+971</option>
+                      </select>
+                      <label>Country code</label>
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
-                      <label for="password">Confirm Password</label>
+                  <div class="input-field col s8">
+                    <input name="phone_number" placeholder="Phone Number" id="disabled" type="text" class="validate">
+                    <label for="disabled">Phone Number</label>
+                    {% if form.phone_number.errors %}
+                    {% for error in form.phone_number.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Signup
-                            <i class="material-icons right">send</i>
-                        </button>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="address" value="Address" id="disabled" type="text" class="validate">
+                    <label for="disabled">Address</label>
+                    {% if form.address.errors %}
+                    {% for error in form.address.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                   </div>
-                </form>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="password" id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                    {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="password2" id="password" type="password" class="validate">
+                    <label for="password2">Confirm Password</label>
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                      <button class="btn waves-effect waves-light" type="submit" name="action">Signup
+                          <i class="material-icons right">send</i>
+                      </button>
+                  </div>
+                </div>
+              </form>
               </div>
         </div>
     </div>

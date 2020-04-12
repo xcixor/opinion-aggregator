@@ -1,0 +1,41 @@
+.content {
+    padding-top: 50px;
+}
+.avatar img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.col p {
+    font-size: 1.4em;
+}
+
+.with-icon i{
+    margin-left: 10px;
+}
+
+.buffer {
+    padding: 20px;
+    margin-top: 200px;
+    border: solid 0.05em #DCDCDC;
+}
+
+.right-col {
+    padding: 0 50px !important;
+}
+
+.col p {
+    overflow-wrap: break-word;
+}
+
+@media only screen and (max-width: 767px) {
+    .buffer {
+        margin-top: 0;
+        padding: 20px;
+    }
+
+    .right-col {
+        padding: 0 !important;
+    }
+}

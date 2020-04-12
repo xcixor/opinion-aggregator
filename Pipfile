@@ -10,6 +10,7 @@ django = "*"
 gunicorn = "*"
 django-forgiving-collectstatic = "*"
 whitenoise = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
