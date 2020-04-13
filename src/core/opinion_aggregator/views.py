@@ -91,15 +91,14 @@ def registration(request):
 def create_service_account():
     """create service account
     """
-    print("in create")
     service_account_data = os.environ.get('SERVICE_ACCOUNT')
     account_data = base64.b64decode(service_account_data)
     data = account_data.decode('ascii')
     base_dir = settings.BASE_DIR
     root_dir = base_dir[:-13]
-    f = open("{}/account.json".format(root_dir), "w")
-    f.write(data)
-    f.close()
+    filename = "{}/account.json".format(root_dir)
+    with open(filename, "w") as f:
+        f.write(data)
 
 @login_required
 def profile(request):
