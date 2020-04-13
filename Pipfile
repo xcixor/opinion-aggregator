@@ -11,6 +11,8 @@ django-forgiving-collectstatic = "*"
 whitenoise = "*"
 pillow = "*"
 django = "==2.0.2"
+install = "*"
+django-storages = {extras = ["google"],version = "*"}
 
 [requires]
 python_version = "3.7"
