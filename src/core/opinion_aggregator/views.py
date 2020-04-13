@@ -26,41 +26,35 @@ def login_request(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
-            user = authenticate(
-                request,
-                email=email,
-                password=password
-                )
-            if user is not None:
-                if user.is_active:
-                    auth_login(request, user)
-                    next_page = request.POST.get('next')
-                    if next_page:
-                        message = "Welcome {}!".format(user.email)
-                        messages.success(request, message, extra_tags='green')
-                        return redirect(next_page)
-                    message = "Welcome {}!".format(user.email)
-                    messages.success(request, message)
-                    return redirect('/')
-                else:
-                    error_message = "That account has not yet been activated"
-                    messages.error(request, error_message, extra_tags='red darken-1')
-                    return render(request, 'auth/activate_account.html', {'email': user.email})
-            else:
-                error_message = "Invalid email/password combination, Please try Again!"
-                messages.error(request, error_message, extra_tags='red darken-1')
-                return redirect('/')
-        else:
-            error_message = "Invalid Credentials, Please try Again!"
-            messages.error(request, error_message, extra_tags='red darken-1')
-            return redirect('/')
-    else:
-        form = LoginForm()
-    msg = "You need to be logged in to perform this action!"
-    messages.error(request, msg, extra_tags='red darken-1')
+            return authenticate_user(request)
+        error_message = "Invalid credentials, check your input and try again!"
+        messages.error(request, error_message, extra_tags='red darken-1')
+        return redirect('/')
     return render(request, 'index.html', context)
+
+
+def authenticate_user(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        if user.is_active:
+            auth_login(request, user)
+            next_page = request.POST.get('next')
+            if next_page:
+                message = "Welcome {}!".format(user.email)
+                messages.success(request, message, extra_tags='green')
+                return redirect(next_page)
+            message = "Welcome {}!".format(user.email)
+            messages.success(request, message)
+            return redirect('/')
+        error_message = "That account has not yet been activated"
+        messages.error(request, error_message, extra_tags='red darken-1')
+        return render(request, 'auth/activate_account.html', {'email': user.email})
+    error_message = "Invalid email/password combination!"
+    messages.error(request, error_message, extra_tags='red darken-1')
+    return redirect('/')
+
 
 def index(request):
     """render the index page
@@ -78,7 +72,6 @@ def registration(request):
         form = UserRegistrationForm(request.POST, request.FILES)
         create_service_account()
         if form.is_valid():
-            # subprocess.call(['deploy.sh'])
             user = form.save(commit=False)
             user.is_active = False
             user.save()

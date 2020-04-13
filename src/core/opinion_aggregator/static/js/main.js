@@ -18,29 +18,21 @@ $(document).ready(function(){
        'showClearBtn': true
      });
 
-    //  $('.datepicker').on('click', hideAvatar);
-
      $('select').formSelect();
+
+     $('.card').on("DOMSubtreeModified",function(){
+      alert('changed');
+    });
+
   });
 
 $(document).click(function(event) {
   $target = $(event.target);
   if(!$target.closest('.datepicker').length &&
   $('.datepicker').is(":visible")) {
-    // $('.modal').modal({'dismissible':false});
   }
-  // else {
-  //   hideAvatar();
-  // }
 });
 
-function hideAvatar(){
-  $('.avatar').css({'display': 'none'});
-}
-
-function displayAvatar(){
-  $('.avatar').css({'display': 'flex'});
-}
 
 $('#search').on('focus', function(){
   $('.above-input').css('display', 'none');
@@ -58,3 +50,4 @@ $('#alert_close').click(function(){
   $( "#alert_box" ).fadeOut( "slow", function() {
   });
 });
+
