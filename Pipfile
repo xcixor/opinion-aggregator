@@ -11,8 +11,8 @@ gunicorn = "*"
 django-forgiving-collectstatic = "*"
 whitenoise = "*"
 pillow = "*"
-django = "==2.2.10"
 sendgrid-django = "*"
+django = "==2.2.8"
 
 [requires]
 python_version = "3.7"
