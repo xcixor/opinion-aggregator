@@ -5,3 +5,6 @@ src/core/opinion_aggregator/staticfiles/js
 src/core/opinion_aggregator/staticfiles/staticfiles.json
 .vscode/
 **__pycache__*
+*media*
+.env
+account.txt

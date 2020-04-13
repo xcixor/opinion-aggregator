@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col m6 s12 left-col">
+                    <div class="row">
+                        {% if request.user.photo %}
+                        <div class="col s12 avatar">
+                            <img src="{{ request.user.photo.url }}" alt="">
+                        </div>
+                        {% else %}
+                        <div class="col s12 avatar">
+                            <img src="{% static 'images/avatar.png' %}" alt="">
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <h4>Welcome {{request.user.email}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <p>{{request.user.firstname}}</p>
+                        </div>
+                        <div class="col s6">
+                            <p>{{request.user.lastname}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m4">
+                            <p>Mobile: {{ request.user.phone_number }}</p>
+                        </div>
+                    </div>
+                    {% if request.user.date_of_birth %}
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <p>DOB: {{ request.user.date_of_birth }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if request.user.address %}
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <p>Address: {{ request.user.address }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col m12 s12">
+                            <p>Password: {{ request.user.password }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col m6 s12 right-col">
+                    <div class="buffer z-depth-2">
+                        <div class="row">
+                            <div class="col s12"><h5>Actions</h5></div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <a href="#" class="with-icon">Edit Profile <i class="material-icons">edit</i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12"><a href="#" class="with-icon">View My Responses <i class="fas fa-eye"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
