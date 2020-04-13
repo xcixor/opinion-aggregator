@@ -133,5 +133,7 @@ def resend_activation_link(request, email):
     if email:
         user = User.objects.get(email=email)
         UserRegistrationForm().send_email(request, user)
+        message = "A new link has been sent to your inbox"
+        messages.success(request, message, extra_tags='green')
         return render(request, 'index.html', {'form': LoginForm()})
     return redirect('/register')
