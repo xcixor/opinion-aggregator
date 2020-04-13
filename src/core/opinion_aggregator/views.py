@@ -1,3 +1,7 @@
+import subprocess
+import os
+import base64
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth import authenticate
@@ -72,7 +76,9 @@ def registration(request):
     """
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
+        create_service_account()
         if form.is_valid():
+            # subprocess.call(['deploy.sh'])
             user = form.save(commit=False)
             user.is_active = False
             user.save()
@@ -88,6 +94,19 @@ def registration(request):
         }
     return render(request, 'registration.html', context)
 
+
+def create_service_account():
+    """create service account
+    """
+    print("in create")
+    service_account_data = os.environ.get('SERVICE_ACCOUNT')
+    account_data = base64.b64decode(service_account_data)
+    data = account_data.decode('ascii')
+    base_dir = settings.BASE_DIR
+    root_dir = base_dir[:-13]
+    f = open("{}/account.json".format(root_dir), "w")
+    f.write(data)
+    f.close()
 
 @login_required
 def profile(request):
