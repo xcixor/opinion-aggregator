@@ -36,13 +36,13 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'opinion_aggregator',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'opinion_aggregator'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 ROOT_URLCONF = 'core.urls'
 
@@ -133,5 +135,10 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'django_forgiving_collectstatic.storages.ForgivingManifestStaticFilesStorage'
 LOGIN_URL = '/login'
 AUTH_USER_MODEL = 'opinion_aggregator.User'
-MEDIA_URL = '/media/'
+MEDIA_URL = os.environ.get('MEDIA_URL')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587

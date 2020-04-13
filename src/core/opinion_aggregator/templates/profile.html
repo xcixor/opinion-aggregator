@@ -14,7 +14,7 @@
                     <div class="row">
                         {% if request.user.photo %}
                         <div class="col s12 avatar">
-                            <img src="{% static 'images/logo.svg' %}" alt="">
+                            <img src="{{ request.user.photo.url }}" alt="">
                         </div>
                         {% else %}
                         <div class="col s12 avatar">
@@ -47,11 +47,6 @@
                         </div>
                     </div>
                     {% endif %}
-                    <div class="row">
-                        <div class="col m12 s12">
-                            <p>Gender: {{ request.user.gender }}</p>
-                        </div>
-                    </div>
                     {% if request.user.address %}
                     <div class="row">
                         <div class="col s12 m12">

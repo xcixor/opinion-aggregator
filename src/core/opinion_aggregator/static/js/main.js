@@ -13,8 +13,7 @@ $(document).ready(function(){
 
      $('.datepicker').datepicker({
        'maxDate': new Date(2007, 01, 01),
-       'onOpen': hideAvatar,
-       'onClose': displayAvatar,
+       'format':'yyyy-mm-dd',
        'autoClose': false,
        'showClearBtn': true
      });
@@ -54,3 +53,8 @@ $('#search').on('focusout', function(){
 $('#dropDownForm').on('click', function () {
   $('.hidden').toggle();
  });
+
+$('#alert_close').click(function(){
+  $( "#alert_box" ).fadeOut( "slow", function() {
+  });
+});

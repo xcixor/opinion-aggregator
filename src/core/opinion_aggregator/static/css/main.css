@@ -88,6 +88,23 @@ body {
     margin-bottom: 0 !important;
 }
 
+.icon_style{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    color: white;
+    cursor:pointer;
+}
+
+#alert_box{
+    position: absolute !important;
+    z-index: 1 !important;
+    left: 100%;
+    margin-left: -300px;
+    opacity: 0.9;
+    top: 0;
+}
 
 @media only screen and (max-width: 767px) {
     .brand-logo {

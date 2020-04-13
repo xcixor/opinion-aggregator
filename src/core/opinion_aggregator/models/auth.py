@@ -101,7 +101,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     country_code = models.ForeignKey(CountryCode, on_delete=models.SET_NULL,
                                      null=True, blank=True)
     phone_number = models.IntegerField(blank=False, null=False)
-    photo = models.ImageField(null=True, upload_to="images/avatars/", blank=True)
+    photo = models.ImageField(null=True, upload_to="avatars/", blank=True)
     change_email = models.EmailField(
         _('email address'), unique=True,
         error_messages={
@@ -124,13 +124,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         """Return a string representaion of the User object."""
-        if self.firstname and self.surname:
-            full_name = '%s %s' % (self.firstname, self.surname)
-            return full_name.strip()
-        elif self.firstname and self.lastname:
+        if self.firstname and self.lastname:
             full_name = '%s %s' % (self.firstname, self.lastname)
-            return full_name.strip()
-        elif self.surname and self.lastname:
-            full_name = '%s %s' % (self.lastname, self.surname)
             return full_name.strip()
         return self.email

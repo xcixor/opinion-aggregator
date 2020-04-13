@@ -22,7 +22,22 @@
 {% block messages %}
     {% if messages %}
     {% for message in messages %}
-        {{ message }}
+    <div class="row" id="alert_box">
+        <div class="col s12 m12">
+          <div class="card {{ message.tags }}">
+            <div class="row">
+              <div class="col s12 m10">
+                <div class="card-content white-text">
+                  <p>{{message}}</p>
+              </div>
+            </div>
+            <div class="col s12 m2">
+              <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
     {% endfor %}
     {% endif %}
 {% endblock %}
@@ -33,27 +48,29 @@
         <div class="row">
             <h4 class="green-text center">Login</h4>
         </div>
-        <form action="#!">
+        <form method="POST" action="/login">
+            {% csrf_token %}
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input placeholder="Placeholder" id="first_name" type="email" name="email" class="validate">
                     <label for="first_name">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
+                <input id="password" type="password" name="password" class="validate">
                 <label for="password">Password</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" href="#!">Login</a>
+                    <button class="waves-effect waves-light btn" type="submit" name="action">Login</button>
                 </div>
                 <div class="input-field col s6">
                     <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
+            <input type="hidden" name="next" value="{{ request.get_full_path|urlencode }}"/>
         </form>
     </ul>
     <nav class="white">
@@ -66,7 +83,12 @@
                     <li><a href="#!" class="green-text">Information and services</a></li>
                     <li><a href="#!" class="green-text">Your Voice</a></li>
                     <li><a href="#!" class="green-text">Other Languages</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="/profile" class="green-text">Profile</a></li>
+                    <li><a href="/logout" class="green-text">Logout</a></li>
+                    {% else %}
                     <li><a class="dropdown-trigger green-text" href="#!" data-target="dropdown">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -85,29 +107,35 @@
         <li><a href="#!" class="green-text">Information and services</a></li>
         <li><a href="#!" class="green-text">Your Voice</a></li>
         <li><a href="#!" class="green-text">Other Languages</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="/profile" class="green-text">Profile</a></li>
+        {% else %}
         <li><a class="green-text" href="#!" id="dropDownForm">Login<i class="material-icons right green-text">arrow_drop_down</i></a></li>
-        <form action="#!" class="hidden auth">
+        <form method="POST" action="/login">
+            {% csrf_token %}
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input placeholder="Placeholder" id="first_name" type="email" name="email" class="validate">
                     <label for="first_name">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
+                <input id="password" type="password" name="password" class="validate">
                 <label for="password">Password</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <a class="waves-effect waves-light btn" href="#!">Login</a>
+                    <button class="waves-effect waves-light btn" type="submit" name="action">Login</button>
                 </div>
                 <div class="input-field col s6">
                     <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
+            <input type="hidden" name="next" value="{{ request.get_full_path|urlencode }}"/>
         </form>
+        {% endif %}
     </ul>
 </header>
 {% endblock %}

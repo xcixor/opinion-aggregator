@@ -25,7 +25,7 @@
     padding: 0 50px !important;
 }
 
-.col p {
+.col p, .col h4 {
     overflow-wrap: break-word;
 }
 
