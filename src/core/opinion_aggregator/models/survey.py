@@ -130,7 +130,6 @@ class QuestionModel(models.Model):
 
 class OptionModel(models.Model):
     """A potential answer to a question
-
     Arguments:
         models {class} -- django model
     """
@@ -138,17 +137,32 @@ class OptionModel(models.Model):
         _('An answer to a question'),
         max_length=200,
         blank=False,
-        null=False, unique=True)
-    question = models.ForeignKey(
-        QuestionModel, related_name='options',
-        on_delete=models.CASCADE,
-        null=False, blank=False)
+        null=False)
 
     class Meta:
         verbose_name_plural = "Options"
 
     def __str__(self):
         return self.description
+
+
+class QuestionOptions(models.Model):
+    """Options for a question
+
+    Arguments:
+        models {class} -- django model
+    """
+    option = models.ForeignKey(
+        OptionModel, on_delete=models.CASCADE,
+        null=False, blank=False)
+
+    question = models.ForeignKey(
+        QuestionModel, related_name='options',
+        on_delete=models.CASCADE,
+        null=False, blank=False)
+
+    class Meta:
+        verbose_name_plural = "Question Options"
 
 
 class SurveyResponsesModel(models.Model):

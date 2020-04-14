@@ -9,4 +9,5 @@ admin.site.register(survey.PartModel)
 admin.site.register(survey.SectionModel)
 admin.site.register(survey.SurveyModel)
 admin.site.register(survey.SurveyResponsesModel)
+admin.site.register(survey.QuestionOptions)
 # Register your models here.
