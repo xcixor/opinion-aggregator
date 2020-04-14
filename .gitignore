@@ -9,3 +9,4 @@ src/core/opinion_aggregator/staticfiles/staticfiles.json
 .env
 account.txt
 account.json
+ignore.txt
