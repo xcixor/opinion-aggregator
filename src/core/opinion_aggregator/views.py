@@ -141,7 +141,7 @@ def resend_activation_link(request, email):
     return redirect('/register')
 
 
-@login_required
+@login_required(login_url="/login")
 def edit_profile(request):
     """edit user profile
     """
