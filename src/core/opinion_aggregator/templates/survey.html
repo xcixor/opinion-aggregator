@@ -19,7 +19,8 @@
 
             {% for part in parts %}
             <div class="row part">
-                <form action="#!">
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="row">
                         <div class="col s12"><h3>{{ part.title }}</h3></div>
                     </div>
@@ -41,21 +42,24 @@
                                 <div class="question">
                                     <div class="col s12">
                                         <p>{{ question.description }}</p>
+                                        {% if  question.options.all %}
                                         {% for option in question.options.all %}
                                         <p>
                                             <label>
-                                                <input name="{{ question.pk }}" type="radio" checked />
+                                                <input name="{{ question.pk }}" type="radio" value="{{ option.description }}"/>
                                                 <span>{{ option.description }}</span>
                                             </label>
                                           </p>
                                         {% endfor %}
+                                        {% else %}
                                         <div class="row">
                                             <div class="col s12">
                                                 <div class="input-field">
-                                                    <input type="text" name="response" id="">
+                                                    <input type="text" name="{{question.pk}}" id="">
                                                 </div>
                                             </div>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +70,7 @@
 
                     <div class="row">
                         <div class="col s12">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit your responses
+                            <button class="btn waves-effect waves-light" type="submit" name="action_{{part.title}}" id="{{part.title}}">Submit your responses for {{part.title}}
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
@@ -76,7 +80,7 @@
             {% endfor %}
 
             {% if parts.has_other_pages %}
-            <ul class="pagination">
+            <ul class="pagination" id="pagination">
                 {% if parts.has_previous %}
                 <li class="waves-effect"><a href="?page={{ parts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
                 {% else %}

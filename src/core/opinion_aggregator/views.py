@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfileForm
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
-from opinion_aggregator.models import User
+from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts
 
 
@@ -33,6 +33,8 @@ def login_request(request):
         error_message = "Invalid credentials, check your input and try again!"
         messages.error(request, error_message, extra_tags='red darken-1')
         return redirect('/')
+    error_message = "Please login to perfom this action"
+    messages.error(request, error_message, extra_tags='red darken-1')
     return render(request, 'index.html', context)
 
 
@@ -118,7 +120,7 @@ def logout_request(request):
     if request.user:
         logout(request)
         message = "Successfuly logged out!"
-        messages.error(request, message, extra_tags='green')
+        messages.success(request, message, extra_tags='green')
         return redirect('/', context)
 
 
@@ -173,9 +175,13 @@ def save_user(form, request):
     User.objects.filter(pk=request.user.pk).update(**cleaned_data)
     return redirect('/profile')
 
+
+@login_required(login_url="/login")
 def survey(request):
     """render a survey
     """
+    if request.method == 'POST':
+        return save_response(request)
     surveys = get_surveys()
     survey_parts = get_survey_parts()
     page = request.GET.get('page', 1)
@@ -193,3 +199,21 @@ def survey(request):
         'parts': parts
     }
     return render(request, 'survey.html', context)
+
+
+def save_response(request):
+    """save user response
+    """
+    user = request.user
+    cleaned_data = request.POST
+    mutable_data = cleaned_data.copy()
+    del mutable_data['csrfmiddlewaretoken']
+    if 'action_Part A' in request.POST:
+        del mutable_data['action_Part A']
+        for key, value in mutable_data.items():
+            question = QuestionModel.objects.filter(pk=int(key)).first()
+            SurveyResponsesModel.objects.create(
+                response=value, user=user, question=question)
+        message = "Thank you for your response"
+        messages.success(request, message, extra_tags='green')
+        return redirect('/survey#pagination')
