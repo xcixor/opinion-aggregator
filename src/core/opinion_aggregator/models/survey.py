@@ -100,6 +100,7 @@ class SectionModel(models.Model):
             description += self.title
             description += "\n\n"
             description += self.long_description
+            return description
         return self.title
 
 
@@ -139,7 +140,7 @@ class OptionModel(models.Model):
         blank=False,
         null=False)
     question = models.ForeignKey(
-        QuestionModel, related_name='answers',
+        QuestionModel, related_name='options',
         on_delete=models.CASCADE,
         null=False, blank=False)
 

@@ -2,6 +2,7 @@ import subprocess
 import os
 import base64
 from django.forms import ValidationError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout
@@ -12,6 +13,7 @@ from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfil
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts
 
 
 # Create your views here.
@@ -170,3 +172,24 @@ def save_user(form, request):
     del cleaned_data['password']
     User.objects.filter(pk=request.user.pk).update(**cleaned_data)
     return redirect('/profile')
+
+def survey(request):
+    """render a survey
+    """
+    surveys = get_surveys()
+    survey_parts = get_survey_parts()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(survey_parts, 1)
+    try:
+        parts = paginator.page(page)
+    except PageNotAnInteger:
+        parts = paginator.page(1)
+    except EmptyPage:
+        parts = paginator.page(paginator.num_pages)
+
+    context = {
+        'surveys': surveys,
+        'parts': parts
+    }
+    return render(request, 'survey.html', context)
