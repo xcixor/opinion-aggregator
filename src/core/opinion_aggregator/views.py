@@ -1,13 +1,14 @@
 import subprocess
 import os
 import base64
+from django.forms import ValidationError
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from opinion_aggregator.forms import UserRegistrationForm, LoginForm
+from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfileForm
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User
@@ -91,6 +92,7 @@ def registration(request):
 def create_service_account():
     """create service account
     """
+    # print(os.environ.get('DJANGO_SETTINGS_MODULE'), '******settings**********')
     service_account_data = os.environ.get('SERVICE_ACCOUNT')
     account_data = base64.b64decode(service_account_data)
     data = account_data.decode('ascii')
@@ -137,3 +139,34 @@ def resend_activation_link(request, email):
         messages.success(request, message, extra_tags='green')
         return render(request, 'index.html', {'form': LoginForm()})
     return redirect('/register')
+
+
+@login_required
+def edit_profile(request):
+    """edit user profile
+    """
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            return clean_password(form, request)
+        return render(request, 'edit_profile.html', {'form': form})
+    return render(request, 'edit_profile.html', {'form': EditProfileForm()})
+
+
+def clean_password(form, request):
+    user = request.user
+    cleaned_data = request.POST
+    password = cleaned_data['password']
+    if password and (not password.isspace()):
+        if not user.check_password(password):
+            error_message = "Wrong password!"
+            messages.error(request, error_message, extra_tags='red darken-1')
+            return redirect('/edit_profile')
+        return save_user(form, request)
+
+
+def save_user(form, request):
+    cleaned_data = form.cleaned_data
+    del cleaned_data['password']
+    User.objects.filter(pk=request.user.pk).update(**cleaned_data)
+    return redirect('/profile')

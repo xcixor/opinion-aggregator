@@ -1,6 +1,8 @@
 import re
+from django.forms import ValidationError
 from django.contrib.sites.shortcuts import get_current_site
 from django import forms
+from django.core.files.storage import FileSystemStorage
 from django.core.files import File
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -8,6 +10,8 @@ from django.template import loader
 from django.core.mail import EmailMultiAlternatives
 from opinion_aggregator.models import User, CountryCode, get_default
 from opinion_aggregator.token import account_activation_token
+from opinion_aggregator.utils import clean_value
+
 
 
 class LoginForm(forms.Form):
@@ -30,6 +34,8 @@ class UserRegistrationForm(forms.ModelForm):
 
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    firstname = forms.CharField(required=True)
+    lastname = forms.CharField(required=True)
 
     def clean_password2(self):
         """
@@ -44,6 +50,22 @@ class UserRegistrationForm(forms.ModelForm):
         if password != cleaned_data['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cleaned_data['password2']
+
+    def clean_firstname(self):
+        """validate firstname
+        """
+        cleaned_data = self.cleaned_data
+        firstname = cleaned_data['firstname']
+        if firstname and (not firstname.isspace()):
+            return clean_value(firstname, 'Firstname')
+
+    def clean_lastname(self):
+        """validate firstname
+        """
+        cleaned_data = self.cleaned_data
+        lastname = cleaned_data['lastname']
+        if lastname and (not lastname.isspace()):
+            return clean_value(lastname, 'Lastname')
 
     def save(self, commit=True):
         """
@@ -93,3 +115,48 @@ class UserRegistrationForm(forms.ModelForm):
         except(TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
         return user
+
+
+class EditProfileForm(forms.Form):
+    """
+    Edit profile form
+        - Collects edited user info
+    """
+
+    firstname = forms.CharField(required=False)
+    password = forms.CharField(widget=forms.PasswordInput)
+    lastname = forms.CharField(required=False)
+    address = forms.CharField(required=False)
+    phone_number = forms.IntegerField(required=False)
+    photo = forms.ImageField(required=False)
+
+
+    def clean_firstname(self):
+        """validate firstname
+        """
+        cleaned_data = self.cleaned_data
+        firstname = cleaned_data['firstname']
+        if firstname and (not firstname.isspace()):
+            return clean_value(firstname, 'Firstname')
+
+    def clean_lastname(self):
+        """validate firstname
+        """
+        cleaned_data = self.cleaned_data
+        lastname = cleaned_data['lastname']
+        if lastname and (not lastname.isspace()):
+            return clean_value(lastname, 'Lastname')
+
+    def clean_date_of_birth(self):
+        cleaned_data = self.cleaned_data
+        date_of_birth = cleaned_data['date_of_birth']
+        if date_of_birth:
+            return date_of_birth
+
+    def clean_photo(self):
+        cleaned_data = self.cleaned_data
+        photo = cleaned_data['photo']
+        if photo:
+            fs = FileSystemStorage()
+            filename = fs.save(photo.name, photo)
+            return filename
