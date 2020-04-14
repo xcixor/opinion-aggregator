@@ -138,7 +138,7 @@ class OptionModel(models.Model):
         _('An answer to a question'),
         max_length=200,
         blank=False,
-        null=False)
+        null=False, unique=True)
     question = models.ForeignKey(
         QuestionModel, related_name='options',
         on_delete=models.CASCADE,
@@ -146,7 +146,6 @@ class OptionModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Options"
-        unique_together = ('description', 'question')
 
     def __str__(self):
         return self.description
@@ -176,4 +175,4 @@ class SurveyResponsesModel(models.Model):
         verbose_name_plural = "Responses"
 
     def __str__(self):
-        return self.description
+        return self.response

@@ -208,12 +208,12 @@ def save_response(request):
     cleaned_data = request.POST
     mutable_data = cleaned_data.copy()
     del mutable_data['csrfmiddlewaretoken']
-    if 'action_Part A' in request.POST:
-        del mutable_data['action_Part A']
-        for key, value in mutable_data.items():
-            question = QuestionModel.objects.filter(pk=int(key)).first()
-            SurveyResponsesModel.objects.create(
-                response=value, user=user, question=question)
-        message = "Thank you for your response"
-        messages.success(request, message, extra_tags='green')
-        return redirect('/survey#pagination')
+    # if 'action_Part A' in request.POST:
+    del mutable_data['action']
+    for key, value in mutable_data.items():
+        question = QuestionModel.objects.filter(pk=int(key)).first()
+        SurveyResponsesModel.objects.create(
+            response=value, user=user, question=question)
+    message = "Thank you for your response"
+    messages.success(request, message, extra_tags='green')
+    return redirect('/survey#pagination')
