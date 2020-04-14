@@ -2,29 +2,23 @@
 {% load static %}
 {% block styles %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/edit_profile.css' %}" />
 {% load static %}
 {% endblock %}
 {% block content %}
 <div class="content">
     <div class="splash row">
-        <div class="row center headline">
-            <h4 class="white-text">The future of the emirates needs you!</h4>
-            <h5 class="white-text">Sign up now</h5>
+        <div class="row center">
+            <h5 class="white-text">Edit Your Profile</h5>
         </div>
         <div class="container z-depth-3">
             <div class="row registration-form">
 
               <form class="col s12" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="row avatar-container">
-                  <div class="avatar z-depth-1">
-                    <i class="fas fa-user-circle orange-text fa-9x"></i>
-                  </div>
-                </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <input name="firstname" placeholder="First Name" id="first_name" type="text" class="validate" required>
+                    <input name="firstname" placeholder="First Name" value="{{request.user.firstname}}" id="first_name" type="text" class="validate">
                     <label for="first_name">First Name</label>
                     {% if form.firstname.errors %}
                     {% for error in form.firstname.errors %}
@@ -35,7 +29,7 @@
                     {% endif %}
                   </div>
                   <div class="input-field col s6">
-                    <input name="lastname" placeholder="Last Name" id="last_name" type="text" class="validate" required>
+                    <input name="lastname" placeholder="Last Name" value="{{request.user.lastname}}" id="last_name" type="text" class="validate">
                     <label for="last_name">Last Name</label>
                     {% if form.lastname.errors %}
                     {% for error in form.lastname.errors %}
@@ -47,23 +41,10 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12">
-                    <input name="email" placeholder="Email" id="email" type="email" class="validate" required>
-                    <label for="email">Email</label>
-                    {% if form.email.errors %}
-                    {% for error in form.email.errors %}
-                    <div class="error">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="row">
                   <div class="col s12">
                     <div class="file-field input-field">
                       <div class="btn">
-                        <span>Your Photo</span>
+                        <span>Change Photo</span>
                         <input type="file" name="photo">
                       </div>
                       <div class="file-path-wrapper">
@@ -91,7 +72,7 @@
                 </div>
                 <div class="row date-row">
                   <div class="input-field col s12">
-                      <input name="date_of_birth" placeholder="Date of Birth: before 2007-01-01" type="text" class="datepicker">
+                      <input value="{{request.user.date_of_birth}}" name="date_of_birth" placeholder="Date of Birth: before 2007-01-01" type="text" class="datepicker">
                   </div>
                   {% if form.date_of_birth.errors %}
                     {% for error in form.date_of_birth.errors %}
@@ -109,7 +90,7 @@
                       <label>Country code</label>
                   </div>
                   <div class="input-field col s8">
-                    <input name="phone_number" placeholder="Phone Number" id="disabled" type="text" class="validate" required>
+                    <input value="{{request.user.phone_number}}" name="phone_number" placeholder="Phone Number" id="disabled" type="text" class="validate">
                     <label for="disabled">Phone Number</label>
                     {% if form.phone_number.errors %}
                     {% for error in form.phone_number.errors %}
@@ -122,7 +103,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="address" value="Address" id="disabled" type="text" class="validate">
+                    <input value="{{request.user.address}}" name="address" value="Address" id="disabled" type="text" class="validate">
                     <label for="disabled">Address</label>
                     {% if form.address.errors %}
                     {% for error in form.address.errors %}
@@ -135,8 +116,8 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="password" id="password" type="password" class="validate" required>
-                    <label for="password">Password</label>
+                    <input name="password" id="password" placeholder="Confirm Password" type="password" class="validate" required>
+                    <label for="password">Enter Password to Confirm</label>
                     {% if form.password.errors %}
                     {% for error in form.password.errors %}
                     <div class="error">
@@ -148,20 +129,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="password2" id="password2" type="password" class="validate" required>
-                    <label for="password2">Confirm Password</label>
-                    {% if form.password2.errors %}
-                    {% for error in form.password2.errors %}
-                    <div class="error">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                      <button class="btn waves-effect waves-light" type="submit" name="action">Signup
+                      <button class="btn waves-effect waves-light" type="submit" name="action">Edit
                           <i class="material-icons right">send</i>
                       </button>
                   </div>
