@@ -12,6 +12,7 @@ from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfil
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User
+from opinion_aggregator.dao.survey import get_surveys
 
 
 # Create your views here.
@@ -170,3 +171,17 @@ def save_user(form, request):
     del cleaned_data['password']
     User.objects.filter(pk=request.user.pk).update(**cleaned_data)
     return redirect('/profile')
+
+def survey(request):
+    """render a survey
+    """
+    surveys = get_surveys()
+    for survey in surveys:
+        parts = survey.parts.all()
+        for part in parts:
+            for section in part.sections.all():
+                print(section.long_description)
+    context = {
+        'surveys': surveys
+    }
+    return render(request, 'survey.html', context)
