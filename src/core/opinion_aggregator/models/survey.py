@@ -152,17 +152,20 @@ class QuestionOptions(models.Model):
     Arguments:
         models {class} -- django model
     """
-    option = models.ForeignKey(
-        OptionModel, on_delete=models.CASCADE,
-        null=False, blank=False)
-
     question = models.ForeignKey(
         QuestionModel, related_name='options',
         on_delete=models.CASCADE,
         null=False, blank=False)
 
+    option = models.ForeignKey(
+        OptionModel, on_delete=models.CASCADE,
+        null=False, blank=False)
+
     class Meta:
         verbose_name_plural = "Question Options"
+
+    def __str__(self):
+        return str(self.option)
 
 
 class SurveyResponsesModel(models.Model):
