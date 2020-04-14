@@ -46,8 +46,8 @@
                                         {% for option in question.options.all %}
                                         <p>
                                             <label>
-                                                <input name="{{ question.pk }}" type="radio" value="{{ option.description }}"/>
-                                                <span>{{ option.description }}</span>
+                                                <input name="{{ question.pk }}" type="radio" value="{{ option }}"/>
+                                                <span>{{ option }}</span>
                                             </label>
                                           </p>
                                         {% endfor %}
