@@ -213,8 +213,9 @@ def save_response(request):
     del mutable_data['action']
     for key, value in mutable_data.items():
         question = QuestionModel.objects.filter(pk=int(key)).first()
-        SurveyResponsesModel.objects.create(
-            response=value, user=user, question=question)
+        if value and (not value.isspace()):
+            SurveyResponsesModel.objects.create(
+                response=value, user=user, question=question)
     message = "Thank you for your response"
     messages.success(request, message, extra_tags='green')
     return redirect('/survey#pagination')
