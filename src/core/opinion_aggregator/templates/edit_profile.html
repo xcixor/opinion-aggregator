@@ -84,7 +84,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="emirates_id" placeholder="Emirates ID" id="emirates" type="number" class="validate" required>
+                    <input value="{{request.user.emirates_id}}" name="emirates_id" placeholder="Emirates ID" id="emirates" type="number" class="validate" required>
                     <label for="emirates">Emirates ID</label>
                     {% if form.emirates_id.errors %}
                     {% for error in form.emirates_id.errors %}
@@ -97,7 +97,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="student_id" placeholder="Student ID" id="student" type="number" class="validate" required>
+                    <input value="{{request.user.student_id}}" name="student_id" placeholder="Student ID" id="student" type="number" class="validate" required>
                     <label for="student">Student ID</label>
                     {% if form.student_id.errors %}
                     {% for error in form.student_id.errors %}
