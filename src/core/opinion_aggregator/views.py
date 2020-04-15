@@ -13,7 +13,7 @@ from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfil
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
 
 
 # Create your views here.
@@ -208,7 +208,6 @@ def save_response(request):
     cleaned_data = request.POST
     mutable_data = cleaned_data.copy()
     del mutable_data['csrfmiddlewaretoken']
-    # if 'action_Part A' in request.POST:
     del mutable_data['action']
     for key, value in mutable_data.items():
         question = QuestionModel.objects.filter(pk=int(key)).first()
@@ -217,3 +216,12 @@ def save_response(request):
     message = "Thank you for your response"
     messages.success(request, message, extra_tags='green')
     return redirect('/survey#pagination')
+
+
+def analytics(request):
+    """render response analysis
+    """
+    context = {
+        'sections': get_survey_sections
+    }
+    return render(request, 'analytics.html', context)

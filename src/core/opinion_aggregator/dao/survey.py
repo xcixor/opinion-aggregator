@@ -14,3 +14,15 @@ def get_survey_parts():
     """
     pages = survey_models.PartModel.objects.all()
     return pages
+
+
+def get_survey_sections():
+    """get all the sections of the survey
+    """
+    sections = survey_models.SectionModel.objects.all()
+    return sections
+
+
+def get_section_questions(section_id):
+    questions = survey_models.QuestionModel.objects.filter(section=section_id)
+    return questions
