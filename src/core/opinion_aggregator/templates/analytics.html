@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/analytics.css' %}" />
+{% load static %}
+{% endblock %}
+{% block header %}
+{% load section_extras %}
+    <header>
+        <div class="navbar-fixed">
+            <nav class="white">
+                <div class="nav-wrapper">
+                    <div class="row hide-on-med-and-down">
+                        <a href="/" class="brand-logo green-text uae-logo"><img src="{% static '/images/logo.svg' %}">Shaping The Future of UAE</a>
+                        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="#!"><i class="material-icons">search</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <ul id="slide-out" class="sidenav sidenav-fixed invesible-top">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="{% static '/images/logo.svg' %}">
+                    </div>
+                </div>
+            </li>
+            {% for section in sections %}
+            <li><a href="#{{section.title}}" class="waves-effect"><i class="fas fa-2x fa-chart-line"></i>{{section.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </header>
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="row">
+            {% for section in sections %}
+
+            {% if section.title == "Personal Information" %}
+            <div class="row analytic z-depth-1" id="{{section.title}}">
+                <div class="row"><h4>{{section.title}}</h4></div>
+                <div class="row analytic-cards">
+                    {% for question in section.questions.all %}
+
+                    {% if question.description == "What is your age ?" %}
+                    <div class="card">
+                    <span class="card-title">Respondents</span>
+                    <div class="card-content">
+                        <p>Total: {{ question.responses.count }}</p>
+                    </div>
+                    </div>
+                    {% endif %}
+
+                    {% if question.description == "what major you willing to apply?" %}
+                    <div class="card">
+                    <span class="card-title">Main majors youth want</span>
+                    <div class="card-content">
+                    {% for response in question.responses.all %}
+                        <p>{{ response }}</p>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    {% endif %}
+
+                    {% if question.description == "what’s your dream job?" %}
+                    <div class="card">
+                    <span class="card-title">Youth dream jobs</span>
+                    <div class="card-content">
+                    {% for response in question.responses.all %}
+                        <p>{{ response }}</p>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    {% endif %}
+
+                    {% if question.description == "what knowledge do you have on work sector market?" %}
+                    <div class="card">
+                    <span class="card-title">Youth thoughts on the job market</span>
+                    <div class="card-content">
+                    {% for response in question.responses.all %}
+                        <p>{{ response }}</p>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    {% endif %}
+
+                    {% if question.description == "What are your Hobbies?" %}
+                    <div class="card">
+                    <span class="card-title">Major hobbies</span>
+                    <div class="card-content">
+                    {% for response in question.responses.all %}
+                        <p>{{ response }}</p>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    {% endif %}
+
+                    {% if question.description == "what is your skills?" %}
+                    <div class="card">
+                    <span class="card-title">Main Skills</span>
+                    <div class="card-content">
+                    {% for response in question.responses.all %}
+                        <p>{{ response }}</p>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    {% endif %}
+
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- personal details -->
+
+
+            <!-- leadership -->
+            {% if section.title == "Leadership" %}
+            <div class="row analytic z-depth-1" id="{{section.title}}">
+                <div class="row"><h4>{{section.title}}</h4></div>
+                <div class="row analytic-cards">
+                    {% for question in section.questions.all %}
+
+                    {% if question.description == "Are you a leader?" %}
+                    <div class="card">
+                        <span class="card-title">Youth who consider themselves leaders</span>
+                        <div class="card-content">
+                            <p>
+                                <span class="number">Leaders {{ question|get_leadership_yes_responses }}</span>
+                            </p>
+                            <p>
+                                <span class="number">Not Leaders {{ question|get_leadership_no_responses }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if question.description == "what do u plan on doing in the future?" %}
+                    <div class="card">
+                        <span class="card-title">Business Leadership</span>
+                        <div class="card-content">
+                            <p>
+                                <span class="number">Entreprenuers {{ question|get_leadership_yes_responses }}</span>
+                            </p>
+                            <p>
+                                <span class="number">Workers {{ question|get_salary_count }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- leadership -->
+
+
+            <!-- leadership -->
+            {% if section.title == "Critical thinking" %}
+            <div class="row analytic z-depth-1" id="{{section.title}}">
+                <div class="row"><h4>{{section.title}}</h4></div>
+                <div class="row analytic-cards">
+                    {% for question in section.questions.all %}
+
+                    {% if question.description == "What top five jobs you think we need in the labor market?" %}
+                    <div class="card">
+                        <span class="card-title">Top 5 Most Needed jobs</span>
+                        <div class="card-content">
+                            {% for response in question.responses.all %}
+                                <p>{{ response }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if question.description == "What top five jobs you think we do not need in the labor market?" %}
+                    <div class="card">
+                        <span class="card-title">Top 5 Most Needed jobs</span>
+                        <div class="card-content">
+                            {% for response in question.responses.all %}
+                                <p>{{ response }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- leadership -->
+
+
+            <!-- Industry -->
+            {% if section.title == "Industry" %}
+            <div class="row analytic z-depth-1" id="{{section.title}}">
+                <div class="row"><h4>{{section.title}}</h4></div>
+                <div class="row analytic-cards">
+                    {% for question in section.questions.all %}
+
+                    <div class="card">
+                        <span class="card-title">Industry Popularity</span>
+                        <div class="card-content">
+                    {% for response in question.responses.all %}
+                    <p>{{response}}:{{ response|get_most_popular_industry }}</p>
+                    {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- industry -->
+
+
+            <!-- end sections -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

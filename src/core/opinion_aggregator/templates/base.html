@@ -82,10 +82,8 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
             <div class="nav-wrapper hide-on-med-and-down">
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#!" class="green-text">About</a></li>
-                    <li><a href="#!" class="green-text">Information and services</a></li>
-                    <li><a href="#!" class="green-text">Your Voice</a></li>
-                    <li><a href="#!" class="green-text">Other Languages</a></li>
+                    <li><a href="/survey" class="green-text">Survey</a></li>
+                    <li><a href="/analytics" class="green-text">Analytics</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="/profile" class="green-text">Profile</a></li>
                     <li><a href="/logout" class="green-text">Logout</a></li>
@@ -106,10 +104,10 @@
                 </div>
               </form>
         </li>
-        <li><a href="#!" class="green-text">About</a></li>
-        <li><a href="#!" class="green-text">Information and services</a></li>
+        <li><a href="/" class="green-text">Home</a></li>
+        <li><a href="/survey" class="green-text">Survey</a></li>
+        <li><a href="/analytics" class="green-text">Analytics</a></li>
         <li><a href="#!" class="green-text">Your Voice</a></li>
-        <li><a href="#!" class="green-text">Other Languages</a></li>
         {% if request.user.is_authenticated %}
         <li><a href="/profile" class="green-text">Profile</a></li>
         {% else %}
@@ -150,12 +148,13 @@
     <div class="container">
         <div class="row">
             <div class="col s6">
-                <a href="#!" class="white-text">About</a>
-                <a href="#!" class="white-text">Information and services</a>
+                <a href="/" class="white-text">Home</a>
+                <a href="/survey" class="white-text">Partake in the survey</a>
+                <a href="/analytics" class="white-text">Analytics</a>
             </div>
             <div class="col s6">
                 <a href="#!" class="white-text">Your Voice</a>
-                <a href="#!" class="white-text">Other Languages</a>
+                <a href="/survey" class="white-text">Partake in the survey</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,97 @@
+.nav-wrapper {
+    height: 50px;
+
+}
+
+@media only screen and (min-width : 992px) {
+    .invesible-top {
+      top: 65px;
+    }
+}
+
+.background {
+    background-color: whitesmoke;
+}
+
+a .fas {
+    display: flex;
+    justify-content: center;
+}
+
+.background img{
+    height: 200px;
+    width: 100%;
+}
+
+.user-view {
+    height: 200px;
+}
+
+.container {
+    margin-left: 300px !important;
+}
+
+.content {
+    padding-top: 50px;
+}
+
+.analytic {
+    margin-left: 310px !important;
+    margin-right: 10px;
+    /* height: 70vh; */
+    padding: 10px;
+}
+
+.card {
+    margin: 20px;
+}
+
+.analytic-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    flex-basis: 30%;
+}
+
+.card-title {
+    padding: 5px 10px;
+}
+
+.card-content {
+    overflow-y: scroll;
+    height: 100px;
+}
+
+.card-content {
+    --scrollbarBG: rgba(0,0,0,0);
+    --thumbBG: #E638b3;
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.card-content::-webkit-scrollbar {
+    width: 11px;
+}
+.card-content::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+.card-content::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+    background: #ce530f;
+    cursor: pointer;
+}
+
+.card-content::-webkit-scrollbar {
+    cursor:pointer;
+}
+
+.total {
+    padding: 5px 10px;
+}
