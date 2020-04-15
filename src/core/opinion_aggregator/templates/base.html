@@ -84,6 +84,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/survey" class="green-text">Survey</a></li>
                     <li><a href="/analytics" class="green-text">Analytics</a></li>
+                    <li><a href="/contact" class="green-text">Your Voice</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="/profile" class="green-text">Profile</a></li>
                     <li><a href="/logout" class="green-text">Logout</a></li>
@@ -107,7 +108,7 @@
         <li><a href="/" class="green-text">Home</a></li>
         <li><a href="/survey" class="green-text">Survey</a></li>
         <li><a href="/analytics" class="green-text">Analytics</a></li>
-        <li><a href="#!" class="green-text">Your Voice</a></li>
+        <li><a href="/contact" class="green-text">Your Voice</a></li>
         {% if request.user.is_authenticated %}
         <li><a href="/profile" class="green-text">Profile</a></li>
         {% else %}
@@ -153,8 +154,8 @@
                 <a href="/analytics" class="white-text">Analytics</a>
             </div>
             <div class="col s6">
-                <a href="#!" class="white-text">Your Voice</a>
                 <a href="/survey" class="white-text">Partake in the survey</a>
+                <a href="/contact" class="white-text">Your Voice</a>
             </div>
         </div>
     </div>

@@ -14,6 +14,8 @@ from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts
+from opinion_aggregator.utils.email import send_email
 
 
 # Create your views here.
@@ -211,8 +213,9 @@ def save_response(request):
     del mutable_data['action']
     for key, value in mutable_data.items():
         question = QuestionModel.objects.filter(pk=int(key)).first()
-        SurveyResponsesModel.objects.create(
-            response=value, user=user, question=question)
+        if value and (not value.isspace()):
+            SurveyResponsesModel.objects.create(
+                response=value, user=user, question=question)
     message = "Thank you for your response"
     messages.success(request, message, extra_tags='green')
     return redirect('/survey#pagination')
@@ -225,3 +228,14 @@ def analytics(request):
         'sections': get_survey_sections
     }
     return render(request, 'analytics.html', context)
+def contact(request):
+    if request.method == "POST":
+        cleaned_data = request.POST
+        firstname = cleaned_data['firstname']
+        email = cleaned_data['email']
+        message = cleaned_data['email_msg']
+        send_email("My voice", email, settings.EMAIL_HOST_USER, message)
+        success = "Your message has been recorded, we will contact you soon"
+        messages.success(request, success, extra_tags='green')
+        return redirect('/')
+    return render(request, 'contact.html')

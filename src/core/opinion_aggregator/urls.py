@@ -15,5 +15,6 @@ urlpatterns = [
     path('resend_activation/<str:email>', views.resend_activation_link, name='resend_activation'),
     path('edit_profile', views.edit_profile, name='edit_profile'),
     path('survey', views.survey, name='survey'),
-    path('analytics', views.analytics, name='analytics')
+    path('analytics', views.analytics, name='analytics'),
+    path('contact', views.contact, name='contacnt')
 ]
