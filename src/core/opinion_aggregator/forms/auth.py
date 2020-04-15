@@ -30,7 +30,7 @@ class UserRegistrationForm(forms.ModelForm):
     """
     class Meta:
         model = User
-        fields = ('email', 'firstname', 'lastname', 'address', 'phone_number', 'date_of_birth', 'gender', 'photo')
+        fields = ('email', 'firstname', 'lastname', 'emirates_id', 'student_id', 'address', 'phone_number', 'date_of_birth', 'gender', 'photo')
 
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
