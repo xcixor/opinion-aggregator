@@ -6,6 +6,7 @@
 {% load static %}
 {% endblock %}
 {% block header %}
+{% load section_extras %}
     <header>
         <div class="navbar-fixed">
             <nav class="white">
@@ -59,7 +60,7 @@
                     <span class="card-title">Main majors youth want</span>
                     <div class="card-content">
                     {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
+                        <p>{{ response }}</p> 
                     {% endfor %}
                     </div>
                     </div>
