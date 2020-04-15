@@ -30,7 +30,9 @@
                 </div>
             </li>
             {% for section in sections %}
+            {% if not section.title == "Skill Rating" and not section.title == "Interests" %}
             <li><a href="#{{section.title}}" class="waves-effect"><i class="fas fa-2x fa-chart-line"></i>{{section.title}}</a></li>
+            {% endif %}
             {% endfor %}
         </ul>
     </header>
@@ -179,7 +181,7 @@
                     {% endif %}
                     {% if question.description == "What top five jobs you think we do not need in the labor market?" %}
                     <div class="card">
-                        <span class="card-title">Top 5 Most Needed jobs</span>
+                        <span class="card-title">Top 5 Least Needed jobs</span>
                         <div class="card-content">
                             {% for response in question.responses.all %}
                                 <p>{{ response }}</p>
