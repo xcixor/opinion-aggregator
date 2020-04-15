@@ -102,6 +102,32 @@
                     {% endif %}
                 </div>
                 <div class="row">
+                  <div class="input-field col s12">
+                    <input name="emirates_id" placeholder="Emirates ID" id="emirates" type="number" class="validate" required>
+                    <label for="emirates">Emirates ID</label>
+                    {% if form.emirates_id.errors %}
+                    {% for error in form.emirates_id.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="student_id" placeholder="Student ID" id="student" type="number" class="validate" required>
+                    <label for="student">Student ID</label>
+                    {% if form.student_id.errors %}
+                    {% for error in form.student_id.errors %}
+                    <div class="error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="row">
                   <div class="input-field col s4">
                       <select>
                           <option value="1" selected>+971</option>
@@ -109,7 +135,7 @@
                       <label>Country code</label>
                   </div>
                   <div class="input-field col s8">
-                    <input name="phone_number" placeholder="Phone Number" id="disabled" type="text" class="validate" required>
+                    <input name="phone_number" placeholder="Phone Number" id="disabled" type="number" class="validate">
                     <label for="disabled">Phone Number</label>
                     {% if form.phone_number.errors %}
                     {% for error in form.phone_number.errors %}

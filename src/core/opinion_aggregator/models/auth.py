@@ -100,7 +100,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         )
     country_code = models.ForeignKey(CountryCode, on_delete=models.SET_NULL,
                                      null=True, blank=True)
-    phone_number = models.IntegerField(blank=False, null=False)
+    phone_number = models.IntegerField(blank=True, null=True)
+    emirates_id = models.IntegerField(blank=False, null=False)
+    student_id = models.IntegerField(blank=False, null=False)
     photo = models.ImageField(null=True, upload_to="avatars/", blank=True)
     change_email = models.EmailField(
         _('email address'), unique=True,
