@@ -80,9 +80,9 @@ def registration(request):
         if form.is_valid():
             create_service_account()
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
-            form.send_email(request, user)
+            # form.send_email(request, user)
             return render(request, 'registration_success.html', {'email': user.email})
         else:
             error_message = "Please correct the errors below and try again!"
