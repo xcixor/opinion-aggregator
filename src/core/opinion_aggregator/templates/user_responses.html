@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4>View Responses made</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row section">
+
+                    {% for response in responses %}
+                    <div class="row">
+                       <div class="col s12">
+                        <p style="font-weight: 600;">{{response.question}}</p>
+                        <p style="font-size: 1.2em;">{{response}}</p>
+                       </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

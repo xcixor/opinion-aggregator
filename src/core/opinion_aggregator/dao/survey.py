@@ -26,3 +26,7 @@ def get_survey_sections():
 def get_section_questions(section_id):
     questions = survey_models.QuestionModel.objects.filter(section=section_id)
     return questions
+
+def get_user_responses(user):
+    responses = survey_models.SurveyResponsesModel.objects.filter(user=user)
+    return responses
