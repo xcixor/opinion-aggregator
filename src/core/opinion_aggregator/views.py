@@ -14,7 +14,7 @@ from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses
 from opinion_aggregator.utils.email import send_email
 
 
@@ -239,3 +239,13 @@ def contact(request):
         messages.success(request, success, extra_tags='green')
         return redirect('/')
     return render(request, 'contact.html')
+
+
+@login_required(login_url="/login")
+def view_personal_responses(request):
+    user = request.user
+    responses = get_user_responses(user)
+    context = {
+        'responses': responses
+    }
+    return render(request, 'user_responses.html', context)
