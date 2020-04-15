@@ -15,6 +15,7 @@ from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses
 from opinion_aggregator.utils.email import send_email
+from opinion_aggregator.utils import create_service_account
 
 
 # Create your views here.
@@ -77,6 +78,7 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
+            create_service_account()
             user = form.save(commit=False)
             user.is_active = False
             user.save()
@@ -156,6 +158,7 @@ def clean_password(form, request):
 
 
 def save_user(form, request):
+    create_service_account()
     cleaned_data = form.cleaned_data
     del cleaned_data['password']
     User.objects.filter(pk=request.user.pk).update(**cleaned_data)

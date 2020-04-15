@@ -128,6 +128,8 @@ class EditProfileForm(forms.Form):
     lastname = forms.CharField(required=False)
     address = forms.CharField(required=False)
     phone_number = forms.IntegerField(required=False)
+    emirates_id = forms.IntegerField(required=False)
+    emirates_id = forms.IntegerField(required=False)
     photo = forms.ImageField(required=False)
 
 
