@@ -58,6 +58,8 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('phone_number', 726173014)
+        extra_fields.setdefault('emirates_id', 12345)
+        extra_fields.setdefault('student_id', 12345)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
