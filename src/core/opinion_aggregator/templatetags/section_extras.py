@@ -27,18 +27,18 @@ def get_leadership_no_responses(question):
 
 @register.filter
 def get_salary_count(question):
-    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="have a job with salary")
+    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="have a job with salary").\
+            values_list('response', flat=True).\
+                distinct()
     return len(responses)
 
 @register.filter
-def get_entreprenuer_count(question):
-    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="being a entrepreneur and have a you own businesses")
+def get_business_responses(question):
+    responses = survey.SurveyResponsesModel.objects.\
+        filter(question=question, response="being a entrepreneur and have a you own businesses").\
+            values_list('response', flat=True).\
+                distinct()
     return len(responses)
-
-@register.filter
-def get_most_popular_industry(industry):
-    response = survey.SurveyResponsesModel.objects.filter(response=industry)
-    return len(response)
 
 @register.filter
 def make_list(value):
@@ -46,10 +46,6 @@ def make_list(value):
     for i in range(0, value):
         loop_list.append(value)
     return loop_list
-
-@register.filter
-def get_top_five(question):
-    majors = survey.SurveyResponsesModel.objects.annotate(num_users=Count())
 
 
 @register.filter

@@ -129,10 +129,10 @@
                         <span class="card-title">Youth who consider themselves leaders</span>
                         <div class="card-content">
                             <p>
-                                <span class="number">Leaders {{ question|get_leadership_yes_responses }}</span>
+                                <p class="number">Leaders <span class="red-text">{{ question|get_leadership_yes_responses }}</span></p>
                             </p>
                             <p>
-                                <span class="number">Not Leaders {{ question|get_leadership_no_responses }}</span>
+                                <p class="number">Not Leaders <span class="red-text">{{ question|get_leadership_no_responses }}</span></p>
                             </p>
                         </div>
                     </div>
@@ -142,10 +142,10 @@
                         <span class="card-title">Business Leadership</span>
                         <div class="card-content">
                             <p>
-                                <span class="number">Entreprenuers {{ question|get_leadership_yes_responses }}</span>
+                                <p class="number">Entreprenuers <span class="red-text">{{ question|get_business_responses }}</span></p>
                             </p>
                             <p>
-                                <span class="number">Workers {{ question|get_salary_count }}</span>
+                                <p class="number">Workers <span class="red-text">{{ question|get_salary_count }}</span></p>
                             </p>
                         </div>
                     </div>
@@ -203,8 +203,8 @@
                     <div class="card">
                         <span class="card-title">Industry Popularity</span>
                         <div class="card-content">
-                    {% for response in question.responses.all %}
-                    <p>{{response}}:{{ response|get_most_popular_industry }}</p>
+                    {% for response in question.responses.all|get_unique_responses:"5" %}
+                    <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                         </div>
                     </div>
