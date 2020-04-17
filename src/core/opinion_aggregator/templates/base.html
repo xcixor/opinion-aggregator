@@ -73,7 +73,9 @@
                     <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
-            <input type="hidden" name="next" value="{{ request.get_full_path|urlencode }}"/>
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+            {% endif %}
         </form>
     </ul>
     <nav class="white">
@@ -141,7 +143,9 @@
                     <a class="waves-effect waves-light btn" href="/register">Register</a>
                 </div>
             </div>
-            <input type="hidden" name="next" value="{{ request.get_full_path|urlencode }}"/>
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+            {% endif %}
         </form>
         {% endif %}
     </ul>
