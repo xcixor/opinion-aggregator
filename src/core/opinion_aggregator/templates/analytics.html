@@ -41,6 +41,11 @@
 <div class="content">
     <div class="row">
         <div class="row">
+            <div class="row analytic">
+                <div class="col s12">
+                    <h2>Emirates Youth Survey Total Respondents {{ total_responders }}</h2>
+                </div>
+            </div>
             {% for section in sections %}
 
             {% if section.title == "Personal Information" %}
@@ -49,20 +54,11 @@
                 <div class="row analytic-cards">
                     {% for question in section.questions.all %}
 
-                    {% if question.description == "What is your age ?" %}
-                    <div class="card">
-                    <span class="card-title">Respondents</span>
-                    <div class="card-content">
-                        <p>Total: {{ question.responses.count }}</p>
-                    </div>
-                    </div>
-                    {% endif %}
-
                     {% if question.description == "what major you willing to apply?" %}
                     <div class="card">
-                    <span class="card-title">Main majors youth want</span>
+                    <span class="card-title">Top Ten Majors youth want</span>
                     <div class="card-content">
-                    {% for response in question.responses.all|get_unique_responses %}
+                    {% for response in question.responses.all|get_unique_responses:"10" %}
                         <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                     </div>
@@ -71,10 +67,10 @@
 
                     {% if question.description == "what’s your dream job?" %}
                     <div class="card">
-                    <span class="card-title">Youth dream jobs</span>
+                    <span class="card-title">Top Ten Youth dream jobs</span>
                     <div class="card-content">
-                    {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
+                    {% for response in question.responses.all|get_unique_responses:"10" %}
+                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                     </div>
                     </div>
@@ -93,10 +89,10 @@
 
                     {% if question.description == "What are your Hobbies?" %}
                     <div class="card">
-                    <span class="card-title">Major hobbies</span>
+                    <span class="card-title">Top Ten Major hobbies</span>
                     <div class="card-content">
-                    {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
+                    {% for response in question.responses.all|get_unique_responses:"10" %}
+                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                     </div>
                     </div>
@@ -106,8 +102,8 @@
                     <div class="card">
                     <span class="card-title">Top Ten Main Skills</span>
                     <div class="card-content">
-                    {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
+                    {% for response in question.responses.all|get_unique_responses:"10" %}
+                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                     </div>
                     </div>
@@ -173,8 +169,8 @@
                     <div class="card">
                         <span class="card-title">Top 5 Most Needed jobs</span>
                         <div class="card-content">
-                            {% for response in question.responses.all %}
-                                <p>{{ response }}</p>
+                            {% for response in question.responses.all|get_unique_responses:"5" %}
+                                <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                             {% endfor %}
                         </div>
                     </div>
@@ -183,8 +179,8 @@
                     <div class="card">
                         <span class="card-title">Top 5 Least Needed jobs</span>
                         <div class="card-content">
-                            {% for response in question.responses.all %}
-                                <p>{{ response }}</p>
+                            {% for response in question.responses.all|get_unique_responses:"5" %}
+                                <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                             {% endfor %}
                         </div>
                     </div>

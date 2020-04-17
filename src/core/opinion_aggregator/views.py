@@ -13,7 +13,7 @@ from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses, get_total_responders
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -195,9 +195,6 @@ def save_response(request):
     """
     user = request.user
     cleaned_data = request.POST
-    cleaned_data_2 = request.POST.getlist('5')
-    # for value in cleaned_data_2:
-    #     print(value)
     mutable_data = cleaned_data.copy()
     del mutable_data['csrfmiddlewaretoken']
     del mutable_data['action']
@@ -222,7 +219,8 @@ def analytics(request):
     """render response analysis
     """
     context = {
-        'sections': get_survey_sections
+        'sections': get_survey_sections,
+        'total_responders': get_total_responders
     }
     return render(request, 'analytics.html', context)
 def contact(request):

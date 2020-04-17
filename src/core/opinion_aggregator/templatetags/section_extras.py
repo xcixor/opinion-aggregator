@@ -11,18 +11,17 @@ def get_count(response):
     return responses
 
 @register.filter
-def get_unique(question):
-    questions = survey.SurveyResponsesModel.objects.get(question=question).first()
-    return questions
-
-@register.filter
 def get_leadership_yes_responses(question):
-    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="Yes")
+    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="Yes").\
+            values_list('response', flat=True).\
+                distinct()
     return len(responses)
 
 @register.filter
 def get_leadership_no_responses(question):
-    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="No")
+    responses = survey.SurveyResponsesModel.objects.filter(question=question, response="No").\
+            values_list('response', flat=True).\
+                distinct()
     return len(responses)
 
 
@@ -59,6 +58,10 @@ def get_popularity(response):
     return len(responses)
 
 @register.filter
-def get_unique_responses(responses):
-    response_list = survey.SurveyResponsesModel.objects.filter(question=responses[0].question).values_list('response', flat=True).distinct()
-    return response_list
+def get_unique_responses(responses, value):
+    if responses:
+        response_list = survey.SurveyResponsesModel.objects.filter(question=responses[0].question).\
+            values_list('response', flat=True).\
+                distinct().order_by('response')[:int(value)]
+        return response_list
+    return None
