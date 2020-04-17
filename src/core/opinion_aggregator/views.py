@@ -83,7 +83,10 @@ def registration(request):
             user.is_active = True
             user.save()
             # form.send_email(request, user)
-            return render(request, 'registration_success.html', {'email': user.email})
+            # return render(request, 'registration_success.html', {'email': user.email})
+            message = "Registrations was a success!"
+            messages.success(request, message, extra_tags='green')
+            redirect('/')
         else:
             error_message = "Please correct the errors below and try again!"
             messages.error(request, error_message, extra_tags='red darken-1')
@@ -138,6 +141,7 @@ def edit_profile(request):
     """edit user profile
     """
     if request.method == 'POST':
+        create_service_account()
         form = EditProfileForm(request.POST, request.FILES)
         if form.is_valid():
             return clean_password(form, request)
@@ -158,7 +162,6 @@ def clean_password(form, request):
 
 
 def save_user(form, request):
-    create_service_account()
     cleaned_data = form.cleaned_data
     del cleaned_data['password']
     User.objects.filter(pk=request.user.pk).update(**cleaned_data)
