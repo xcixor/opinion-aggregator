@@ -40,3 +40,25 @@ def get_entreprenuer_count(question):
 def get_most_popular_industry(industry):
     response = survey.SurveyResponsesModel.objects.filter(response=industry)
     return len(response)
+
+@register.filter
+def make_list(value):
+    loop_list = []
+    for i in range(0, value):
+        loop_list.append(value)
+    return loop_list
+
+@register.filter
+def get_top_five(question):
+    majors = survey.SurveyResponsesModel.objects.annotate(num_users=Count())
+
+
+@register.filter
+def get_popularity(response):
+    responses = survey.SurveyResponsesModel.objects.filter(response=response)
+    return len(responses)
+
+@register.filter
+def get_unique_responses(responses):
+    response_list = survey.SurveyResponsesModel.objects.filter(question=responses[0].question).values_list('response', flat=True).distinct()
+    return response_list

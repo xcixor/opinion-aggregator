@@ -195,14 +195,24 @@ def save_response(request):
     """
     user = request.user
     cleaned_data = request.POST
+    cleaned_data_2 = request.POST.getlist('5')
+    # for value in cleaned_data_2:
+    #     print(value)
     mutable_data = cleaned_data.copy()
     del mutable_data['csrfmiddlewaretoken']
     del mutable_data['action']
     for key, value in mutable_data.items():
         question = QuestionModel.objects.filter(pk=int(key)).first()
-        if value and (not value.isspace()):
-            SurveyResponsesModel.objects.create(
-                response=value, user=user, question=question)
+        if question.open_ended:
+            cleaned_data_2 = request.POST.getlist(str(question.pk))
+            for value in cleaned_data_2:
+                if value and (not value.isspace()):
+                    SurveyResponsesModel.objects.create(
+                        response=value, user=user, question=question)
+        else:
+            if value and (not value.isspace()):
+                SurveyResponsesModel.objects.create(
+                    response=value, user=user, question=question)
     message = "Thank you for your response"
     messages.success(request, message, extra_tags='green')
     return redirect('/survey#pagination')

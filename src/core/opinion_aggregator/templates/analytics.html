@@ -62,8 +62,8 @@
                     <div class="card">
                     <span class="card-title">Main majors youth want</span>
                     <div class="card-content">
-                    {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
+                    {% for response in question.responses.all|get_unique_responses %}
+                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
                     {% endfor %}
                     </div>
                     </div>
@@ -104,7 +104,7 @@
 
                     {% if question.description == "what is your skills?" %}
                     <div class="card">
-                    <span class="card-title">Main Skills</span>
+                    <span class="card-title">Top Ten Main Skills</span>
                     <div class="card-content">
                     {% for response in question.responses.all %}
                         <p>{{ response }}</p>
