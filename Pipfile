@@ -15,6 +15,7 @@ sendgrid-django = "*"
 django = "==2.2.8"
 psycopg2-binary = "*"
 dj-database-url = "*"
+google-cloud-storage = "*"
 
 [requires]
 python_version = "3.7"

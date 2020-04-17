@@ -161,4 +161,5 @@ class EditProfileForm(forms.Form):
         if photo:
             fs = FileSystemStorage()
             filename = fs.save(photo.name, photo)
-            return filename
+            uploaded_file_url = fs.url(filename)
+            return uploaded_file_url
