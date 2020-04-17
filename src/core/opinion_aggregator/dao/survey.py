@@ -30,3 +30,9 @@ def get_section_questions(section_id):
 def get_user_responses(user):
     responses = survey_models.SurveyResponsesModel.objects.filter(user=user)
     return responses
+
+def get_total_responders():
+    responses = survey_models.SurveyResponsesModel.objects.values_list('user', flat=True).\
+                distinct().count()
+    return responses
+    # return 5

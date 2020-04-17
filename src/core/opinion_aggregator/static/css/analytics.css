@@ -38,12 +38,11 @@ a .fas {
 .analytic {
     margin-left: 310px !important;
     margin-right: 10px;
-    /* height: 70vh; */
     padding: 10px;
 }
 
 .card {
-    margin: 20px;
+    margin-right: 2%;
 }
 
 .analytic-cards {
@@ -61,7 +60,8 @@ a .fas {
 
 .card-content {
     overflow-y: scroll;
-    height: 100px;
+    height: 200px;
+    font-size: 1.2em;
 }
 
 .card-content {

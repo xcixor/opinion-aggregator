@@ -6,6 +6,7 @@
 {% load static %}
 {% endblock %}
 {% block content %}
+
 <div class="content">
     <div class="row">
         <div class="container">
@@ -42,6 +43,19 @@
                                 <div class="question">
                                     <div class="col s12">
                                         <p>{{ question.description }}</p>
+                                        {% if question.open_ended %}
+
+                                        {% for item in "x"|ljust:question.expected_answers %}
+                                        <div class="row"><br>
+                                            <div class="col s12 m6">
+                                                <div class="input-field">
+                                                    <input type="text" name="{{question.pk}}" id="{{item}}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {% endfor %}
+                                        {% else %}
                                         {% if  question.options.all %}
                                         {% for option in question.options.all %}
                                         <p>
@@ -59,6 +73,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% endif %}
                                         {% endif %}
                                     </div>
                                 </div>

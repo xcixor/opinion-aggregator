@@ -13,7 +13,7 @@ from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses
+from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses, get_total_responders
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -51,6 +51,7 @@ def authenticate_user(request):
             if next_page:
                 message = "Welcome {}!".format(user.email)
                 messages.success(request, message, extra_tags='green')
+                print(next_page, '*******************')
                 return redirect(next_page)
             message = "Welcome {}!".format(user.email)
             messages.success(request, message)
@@ -200,9 +201,16 @@ def save_response(request):
     del mutable_data['action']
     for key, value in mutable_data.items():
         question = QuestionModel.objects.filter(pk=int(key)).first()
-        if value and (not value.isspace()):
-            SurveyResponsesModel.objects.create(
-                response=value, user=user, question=question)
+        if question.open_ended:
+            cleaned_data_2 = request.POST.getlist(str(question.pk))
+            for value in cleaned_data_2:
+                if value and (not value.isspace()):
+                    SurveyResponsesModel.objects.create(
+                        response=value, user=user, question=question)
+        else:
+            if value and (not value.isspace()):
+                SurveyResponsesModel.objects.create(
+                    response=value, user=user, question=question)
     message = "Thank you for your response"
     messages.success(request, message, extra_tags='green')
     return redirect('/survey#pagination')
@@ -212,7 +220,8 @@ def analytics(request):
     """render response analysis
     """
     context = {
-        'sections': get_survey_sections
+        'sections': get_survey_sections,
+        'total_responders': get_total_responders
     }
     return render(request, 'analytics.html', context)
 def contact(request):

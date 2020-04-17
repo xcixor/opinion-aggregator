@@ -120,6 +120,13 @@ class QuestionModel(models.Model):
         on_delete=models.CASCADE,
         null=False, blank=False)
 
+    open_ended = models.BooleanField(
+        _('open_ended'), default=False, help_text=_(
+            'Designates whether this question expects multiple answers.'),
+        )
+
+    expected_answers = models.IntegerField(default=1)
+
     class Meta:
         verbose_name_plural = "Questions"
         unique_together = ('description', 'section')
