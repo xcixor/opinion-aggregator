@@ -51,6 +51,7 @@ def authenticate_user(request):
             if next_page:
                 message = "Welcome {}!".format(user.email)
                 messages.success(request, message, extra_tags='green')
+                print(next_page, '*******************')
                 return redirect(next_page)
             message = "Welcome {}!".format(user.email)
             messages.success(request, message)
