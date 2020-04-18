@@ -112,5 +112,14 @@ body {
     .brand-logo {
         text-align: center;
         font-size: 80% !important;
+        width: 60% !important;
     }
+    .uae-logo img {
+        height: 16px;
+        width: 16px;
+        padding: 2px;
+        margin-right: 10px;
+        margin-left: 5px;
+    }
+    
 }

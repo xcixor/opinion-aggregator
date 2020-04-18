@@ -95,3 +95,29 @@ a .fas {
 .total {
     padding: 5px 10px;
 }
+
+.brand-logo {
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .analytic {
+        margin-left: 0 !important;
+    }
+
+    .card {
+        flex-basis: 98%;
+    }
+
+    .card .card-title {
+        font-size: 18px !important;
+        padding: 0;
+        margin: 10px;
+        width: 100%;
+        text-indent: 0 !important;
+    }
+    h2 {
+        font-size: 2rem !important;
+        margin: 0 !important;
+    }
+}
