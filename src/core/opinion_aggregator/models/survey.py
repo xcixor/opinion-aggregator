@@ -130,6 +130,7 @@ class QuestionModel(models.Model):
     class Meta:
         verbose_name_plural = "Questions"
         unique_together = ('description', 'section')
+        ordering = ('description',)
 
     def __str__(self):
         return self.description
@@ -148,6 +149,7 @@ class OptionModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Options"
+        ordering = ('description',)
 
     def __str__(self):
         return self.description
@@ -164,15 +166,47 @@ class QuestionOptions(models.Model):
         on_delete=models.CASCADE,
         null=False, blank=False)
 
+    has_sub_category = models.BooleanField(
+        _('has_subcategories'), default=False, help_text=_(
+            'Designates whether this option has sub categories of answers.'),
+        )
+
     option = models.ForeignKey(
         OptionModel, on_delete=models.CASCADE,
         null=False, blank=False)
 
     class Meta:
         verbose_name_plural = "Question Options"
+        ordering = ('option',)
 
     def __str__(self):
         return str(self.option)
+
+
+class OptionSubCategory(models.Model):
+    """Subcategories for a question
+
+    Arguments:
+        models {class} -- django model
+    """
+    option = models.ForeignKey(
+        QuestionOptions, related_name='sub_categories',
+        on_delete=models.CASCADE,
+        null=False, blank=False)
+
+    description = models.CharField(
+        _('A sub category for an answer'),
+        max_length=200,
+        blank=False,
+        null=False)
+
+    class Meta:
+        verbose_name_plural = "Option sub categories"
+        ordering = ('description',)
+        unique_together = ('description', 'option')
+
+    def __str__(self):
+        return self.description
 
 
 class SurveyResponsesModel(models.Model):
