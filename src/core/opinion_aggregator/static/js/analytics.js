@@ -38,8 +38,16 @@ function drawChart(categories, id, title) {
     data.addColumn('string', 'Categories');
     data.addColumn('number', 'Popularity');
     data.addRows(categories);
-    // Optional; add a title and set the width and height of the chart
-    var options = {'title':title, 'width':550, 'height':400};
+
+    var screenWidth = $( window ).width();
+    console.log(screenWidth);
+    if (screenWidth > 1024){
+        var options = {'title':title, 'width':'50%', 'height':400};
+    }else if(screenWidth > 767 && screenWidth < 1024){
+        var options = {'title':title, 'width':'50%', 'height':250};
+    }else {
+        var options = {'title':title, 'width':'100%', 'height':220};
+    }
 
     // Display the chart inside the <div> element with id="piechart"
     var chart = new google.visualization.PieChart(document.getElementById(id));
