@@ -74,6 +74,6 @@ def get_unique_responses(responses, value):
     if responses:
         response_list = survey_models.SurveyResponsesModel.objects.filter(question=responses[0].question).\
             values_list('response', flat=True).\
-                distinct().order_by('response')[:int(value)]
+                distinct().annotate(response_count=Count('response')).order_by('-response_count')[:int(value)]
         return response_list
     return None
