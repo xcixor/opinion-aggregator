@@ -10,7 +10,7 @@ class ResponsesAdmin(admin.ModelAdmin):
 class OptionSubCategoryModelInline(NestedStackedInline):
     fk_name = 'option'
     model = survey.OptionSubCategory
-    extra = 1
+    extra = 0
 
 
 class QuestionOptionsModelAdmin(admin.ModelAdmin):
@@ -22,7 +22,7 @@ class OptionModelInline(NestedStackedInline):
     # show_change_link = True
     fk_name = 'question'
     inlines = [OptionSubCategoryModelInline]
-    extra = 1
+    extra = 0
 
 
 class QuestionModelAdmin(NestedModelAdmin):
