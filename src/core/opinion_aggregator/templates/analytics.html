@@ -59,34 +59,13 @@
                     {% for question in section.questions.all %}
 
                     {% if question.description == "what major you willing to apply?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="major">
                     <div class="card">
-                    <span class="card-title">Top Ten Majors youth want</span>
+                    <span class="card-title">Top Five Main majors</span>
                     <div class="card-content">
-                    {% for response in question.responses.all|get_unique_responses:"10" %}
-                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                    {% endfor %}
+                    <div id="majorBarChart">
+                        <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
-                    </div>
-                    {% endif %}
-
-                    {% if question.description == "what’s your dream job?" %}
-                    <div class="card">
-                    <span class="card-title">Top Ten Youth dream jobs</span>
-                    <div class="card-content">
-                    {% for response in question.responses.all|get_unique_responses:"10" %}
-                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                    {% endfor %}
-                    </div>
-                    </div>
-                    {% endif %}
-
-                    {% if question.description == "what knowledge do you have on work sector market?" %}
-                    <div class="card">
-                    <span class="card-title">Youth thoughts on the job market</span>
-                    <div class="card-content">
-                    {% for response in question.responses.all %}
-                        <p>{{ response }}</p>
-                    {% endfor %}
                     </div>
                     </div>
                     {% endif %}
@@ -182,23 +161,25 @@
                     {% for question in section.questions.all %}
 
                     {% if question.description == "What top five jobs you think we need in the labor market?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="neededJobs">
                     <div class="card">
-                        <span class="card-title">Top 5 Most Needed jobs</span>
-                        <div class="card-content">
-                            {% for response in question.responses.all|get_unique_responses:"5" %}
-                                <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                            {% endfor %}
-                        </div>
+                    <span class="card-title">Top 5 Most Needed jobs</span>
+                    <div class="card-content">
+                    <div id="neededJobsBarChart">
+                        <i class="fas fa-spinner fa-pulse green-text"></i>
+                    </div>
+                    </div>
                     </div>
                     {% endif %}
                     {% if question.description == "What top five jobs you think we do not need in the labor market?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="unneededJobs">
                     <div class="card">
-                        <span class="card-title">Top 5 Least Needed jobs</span>
-                        <div class="card-content">
-                            {% for response in question.responses.all|get_unique_responses:"5" %}
-                                <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                            {% endfor %}
-                        </div>
+                    <span class="card-title">Top 5 Least Needed jobs</span>
+                    <div class="card-content">
+                    <div id="unneededJobsBarChart">
+                        <i class="fas fa-spinner fa-pulse green-text"></i>
+                    </div>
+                    </div>
                     </div>
                     {% endif %}
 

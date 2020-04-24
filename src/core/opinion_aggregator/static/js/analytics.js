@@ -46,6 +46,48 @@ $('#hobbyBarChart').ready(function(){
 
 });
 
+$('#majorBarChart').ready(function(){
+    // fetch data from db
+    $.getJSON("/get_bar_chart_data", {'question': $('#major').val()}, function(j) {
+        google.charts.setOnLoadCallback(function () {
+            var categories = [];
+            for(key in j){
+                categories.push([key, j[key]]);
+            }
+            drawChart(categories, 'majorBarChart', 'Job Popularity', 'bar');
+         });
+    })
+
+});
+
+$('#neededJobsBarChart').ready(function(){
+    // fetch data from db
+    $.getJSON("/get_bar_chart_data", {'question': $('#neededJobs').val()}, function(j) {
+        google.charts.setOnLoadCallback(function () {
+            var categories = [];
+            for(key in j){
+                categories.push([key, j[key]]);
+            }
+            drawChart(categories, 'neededJobsBarChart', 'Job Popularity', 'bar');
+         });
+    })
+
+});
+
+$('#unneededJobsBarChart').ready(function(){
+    // fetch data from db
+    $.getJSON("/get_bar_chart_data", {'question': $('#unneededJobs').val()}, function(j) {
+        google.charts.setOnLoadCallback(function () {
+            var categories = [];
+            for(key in j){
+                categories.push([key, j[key]]);
+            }
+            drawChart(categories, 'unneededJobsBarChart', 'Job Popularity', 'bar');
+         });
+    })
+
+});
+
 // Draw the chart and set the chart values
 function drawChart(categories, id, title, type) {
     var data = new google.visualization.DataTable();
