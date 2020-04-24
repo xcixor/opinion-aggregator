@@ -260,9 +260,10 @@ def get_chart_data(request):
     try:
         question = request.GET["question"]
     except:
-        return JsonResponse({'Error': 'Question not found!'})
+        return JsonResponse({})
     data = get_question_responses(question)
     response = {}
     for data_object in data:
-        response[str(data_object)] = data_object.sub_categories.count()
+        if data_object.sub_categories.count():
+            response[str(data_object)] = data_object.sub_categories.count()
     return JsonResponse(response)
