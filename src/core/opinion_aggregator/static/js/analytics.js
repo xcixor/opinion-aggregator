@@ -12,7 +12,7 @@ $('#skillsPieChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'skillsPieChart', 'Skills Popularity');
+            drawChart(categories, 'skillsPieChart', 'Skills Popularity', 'pie');
          });
     })
 
@@ -26,21 +26,34 @@ $('#jobsPieChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'jobsPieChart', 'Job Popularity');
+            drawChart(categories, 'jobsPieChart', 'Job Popularity', 'pie');
+         });
+    })
+
+});
+
+$('#hobbyBarChart').ready(function(){
+    // fetch data from db
+    $.getJSON("/get_bar_chart_data", {'question': $('#hobby').val()}, function(j) {
+        google.charts.setOnLoadCallback(function () {
+            var categories = [];
+            for(key in j){
+                categories.push([key, j[key]]);
+            }
+            drawChart(categories, 'hobbyBarChart', 'Job Popularity', 'bar');
          });
     })
 
 });
 
 // Draw the chart and set the chart values
-function drawChart(categories, id, title) {
+function drawChart(categories, id, title, type) {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Categories');
     data.addColumn('number', 'Popularity');
     data.addRows(categories);
 
     var screenWidth = $( window ).width();
-    console.log(screenWidth);
     if (screenWidth > 1024){
         var options = {'title':title, 'width':'50%', 'height':400};
     }else if(screenWidth > 767 && screenWidth < 1024){
@@ -50,6 +63,11 @@ function drawChart(categories, id, title) {
     }
 
     // Display the chart inside the <div> element with id="piechart"
-    var chart = new google.visualization.PieChart(document.getElementById(id));
-    chart.draw(data, options);
+    if(type == 'pie'){
+        var chart = new google.visualization.PieChart(document.getElementById(id));
+        chart.draw(data, options);
+    }else{
+        var chart = new google.visualization.BarChart(document.getElementById(id));
+        chart.draw(data, options);
+    }
 }

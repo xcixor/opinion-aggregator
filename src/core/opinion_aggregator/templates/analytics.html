@@ -92,12 +92,13 @@
                     {% endif %}
 
                     {% if question.description == "What are your Hobbies?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="hobby">
                     <div class="card">
-                    <span class="card-title">Top Ten Major hobbies</span>
+                    <span class="card-title">Top Five Major hobbies</span>
                     <div class="card-content">
-                    {% for response in question.responses.all|get_unique_responses:"10" %}
-                        <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                    {% endfor %}
+                    <div id="hobbyBarChart">
+                        <i class="fas fa-spinner fa-pulse green-text"></i>
+                    </div>
                     </div>
                     </div>
                     {% endif %}

@@ -16,7 +16,7 @@ from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
 from opinion_aggregator.dao.survey import (
     get_surveys, get_survey_parts, get_user_responses,
-    get_total_responders, get_question_responses)
+    get_total_responders, get_question_responses, get_question_options, get_popularity, get_unique_responses)
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -261,9 +261,25 @@ def get_chart_data(request):
         question = request.GET["question"]
     except:
         return JsonResponse({})
-    data = get_question_responses(question)
+    data = get_question_options(question.strip())
     response = {}
     for data_object in data:
         if data_object.sub_categories.count():
             response[str(data_object)] = data_object.sub_categories.count()
+    return JsonResponse(response)
+
+
+def get_bar_chart_data(request):
+    """get bar chart data
+    """
+    try:
+        question = request.GET["question"]
+    except:
+        return JsonResponse({})
+    data = get_question_responses(question.strip())
+    response = {}
+    if data:
+        unique_data = get_unique_responses(data, 5)
+        for data_object in unique_data:
+            response[data_object] = get_popularity(data_object)
     return JsonResponse(response)

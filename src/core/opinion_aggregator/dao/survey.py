@@ -1,7 +1,9 @@
 """fetch data from survey models
 """
-from opinion_aggregator.models import survey as survey_models
 from django.core.paginator import Paginator
+from django.db.models import Count
+from opinion_aggregator.models import survey as survey_models
+
 
 def get_surveys():
     """fetches surveys
@@ -36,12 +38,42 @@ def get_total_responders():
                 distinct().count()
     return responses
 
-def get_question_responses(question):
+def get_question_options(question):
     """fetch a question responses
 
     Arguments:
         question {string} -- question to fetch responses for
     """
     question_object = survey_models.QuestionModel.objects.filter(description=question).first()
+    print(question_object.responses.all())
     responses = survey_models.QuestionOptions.objects.filter(question=question_object)
     return responses
+
+
+def get_question_responses(question):
+    question_object = survey_models.QuestionModel.objects.filter(description=question).first()
+    return question_object.responses.all()
+
+
+
+def get_popularity(response):
+    responses = survey_models.SurveyResponsesModel.objects.filter(response=response)
+    return len(responses)
+
+
+def get_unique_responses(responses, value):
+    """get unique responses
+
+    Arguments:
+        responses {[queryset]} -- [queryset to filter from responses model]
+        value {[type]} -- [restrict to this number of responses]
+
+    Returns:
+        [type] -- [description]
+    """
+    if responses:
+        response_list = survey_models.SurveyResponsesModel.objects.filter(question=responses[0].question).\
+            values_list('response', flat=True).\
+                distinct().order_by('response')[:int(value)]
+        return response_list
+    return None
