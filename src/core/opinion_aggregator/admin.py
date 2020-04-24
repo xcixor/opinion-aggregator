@@ -17,6 +17,7 @@ class QuestionOptionsModelAdmin(admin.ModelAdmin):
 
 class OptionModelInline(admin.StackedInline):
     model = survey.QuestionOptions
+    show_change_link = True
     extra = 1
 
 

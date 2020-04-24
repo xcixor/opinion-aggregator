@@ -35,4 +35,13 @@ def get_total_responders():
     responses = survey_models.SurveyResponsesModel.objects.values_list('user', flat=True).\
                 distinct().count()
     return responses
-    # return 5
+
+def get_question_responses(question):
+    """fetch a question responses
+
+    Arguments:
+        question {string} -- question to fetch responses for
+    """
+    question_object = survey_models.QuestionModel.objects.filter(description=question).first()
+    responses = survey_models.QuestionOptions.objects.filter(question=question_object)
+    return responses

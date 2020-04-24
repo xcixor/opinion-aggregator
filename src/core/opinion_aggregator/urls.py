@@ -17,5 +17,6 @@ urlpatterns = [
     path('survey', views.survey, name='survey'),
     path('analytics', views.analytics, name='analytics'),
     path('contact', views.contact, name='contact'),
-    path('user_responses', views.view_personal_responses, name='user_responses')
+    path('user_responses', views.view_personal_responses, name='user_responses'),
+    path('get_chart_data', views.get_chart_data, name='get_chart_data')
 ]

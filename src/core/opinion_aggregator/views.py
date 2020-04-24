@@ -8,12 +8,15 @@ from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfileForm
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses, get_total_responders
+from opinion_aggregator.dao.survey import (
+    get_surveys, get_survey_parts, get_user_responses,
+    get_total_responders, get_question_responses)
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -247,3 +250,19 @@ def view_personal_responses(request):
         'responses': responses
     }
     return render(request, 'user_responses.html', context)
+
+def get_chart_data(request):
+    """get chart data
+
+    Arguments:
+        request {[type]} -- [description]
+    """
+    try:
+        question = request.GET["question"]
+    except:
+        return JsonResponse({'Error': 'Question not found!'})
+    data = get_question_responses(question)
+    response = {}
+    for data_object in data:
+        response[str(data_object)] = data_object.sub_categories.count()
+    return JsonResponse(response)
