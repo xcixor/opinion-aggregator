@@ -40,7 +40,7 @@ $('#hobbyBarChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'hobbyBarChart', 'Job Popularity', 'bar');
+            drawChart(categories, 'hobbyBarChart', 'Hobby Popularity', 'bar');
          });
     })
 
@@ -54,7 +54,7 @@ $('#majorBarChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'majorBarChart', 'Job Popularity', 'bar');
+            drawChart(categories, 'majorBarChart', 'Major Popularity', 'bar');
          });
     })
 
@@ -68,7 +68,7 @@ $('#neededJobsBarChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'neededJobsBarChart', 'Job Popularity', 'bar');
+            drawChart(categories, 'neededJobsBarChart', 'Needed Jobs', 'bar');
          });
     })
 
@@ -82,7 +82,7 @@ $('#unneededJobsBarChart').ready(function(){
             for(key in j){
                 categories.push([key, j[key]]);
             }
-            drawChart(categories, 'unneededJobsBarChart', 'Job Popularity', 'bar');
+            drawChart(categories, 'unneededJobsBarChart', 'Jobs out of favor', 'bar');
          });
     })
 
