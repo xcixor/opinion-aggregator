@@ -44,17 +44,39 @@
                                     <div class="col s12">
                                         <p>{{ question.description }}</p>
                                         {% if question.open_ended %}
-                                        {% for item in "x"|ljust:question.expected_answers %}
-                                        <div class="row"><br>
-                                            <div class="col s12 m6">
-                                                <div class="input-field">
-                                                    <input type="text" name="{{question.pk}}" id="{{item}}">
+                                            {% if  question.options.all %}
+                                                <h4>Please select at most {{ question.expected_answers }} choices</h4>
+                                                {% for option in question.options.all %}
+                                                    {% if option.has_sub_category %}
+                                                        {% for category in option.sub_categories.all %}
+                                                        <div class="row"><br>
+                                                        <div class="col s12 m6">
+                                                        <p>
+                                                        <label>
+                                                            <input name="{{ question.pk }}" type="checkbox" value="{{ category }}"/>
+                                                            <span>{{ category }}</span>
+                                                            </label>
+                                                        </p>
+                                                        </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                    <p>error</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                            {% for item in "x"|ljust:question.expected_answers %}
+                                                <div class="row"><br>
+                                                    <div class="col s12 m6">
+                                                        <div class="input-field">
+                                                            <input type="text" name="{{question.pk}}" id="{{item}}">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
+                                            {% endfor %}
+                                            {% endif %}
                                         {% else %}
-                                        {% if  question.options.all %}
+                                        {% if  not question.open_ended and question.options.all %}
                                         {% for option in question.options.all %}
                                         {% if option.has_sub_category %}
                                             {% for category in option.sub_categories.all %}

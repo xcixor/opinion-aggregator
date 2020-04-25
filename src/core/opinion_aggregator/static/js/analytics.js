@@ -6,7 +6,7 @@ $('#jobsPieChart').ready(function(){
 
 $('#skillsPieChart').ready(function(){
     // fetch data from db
-    $.getJSON("/get_chart_data", {'question': $('#skills').val()}, function(j) {
+    $.getJSON("/get_pie_chart_data", {'question': $('#skills').val()}, function(j) {
         google.charts.setOnLoadCallback(function () {
             var categories = [];
             for(key in j){
@@ -20,7 +20,7 @@ $('#skillsPieChart').ready(function(){
 
 $('#jobsPieChart').ready(function(){
     // fetch data from db
-    $.getJSON("/get_chart_data", {'question': $('#jobs').val()}, function(j) {
+    $.getJSON("/get_pie_chart_data", {'question': $('#jobs').val()}, function(j) {
         google.charts.setOnLoadCallback(function () {
             var categories = [];
             for(key in j){

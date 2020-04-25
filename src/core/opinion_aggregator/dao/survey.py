@@ -45,7 +45,6 @@ def get_question_options(question):
         question {string} -- question to fetch responses for
     """
     question_object = survey_models.QuestionModel.objects.filter(description=question).first()
-    print(question_object.responses.all())
     responses = survey_models.QuestionOptions.objects.filter(question=question_object)
     return responses
 
@@ -77,3 +76,13 @@ def get_unique_responses(responses, value):
                 distinct().annotate(response_count=Count('response')).order_by('-response_count')[:int(value)]
         return response_list
     return None
+
+
+def get_sub_categories_count(options, count):
+    """return count of an options subcategories
+    """
+    count = 0
+    for option in options:
+        sub_category_response_count = survey_models.SurveyResponsesModel.objects.filter(response=option).count()
+        count += sub_category_response_count
+    return count

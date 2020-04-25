@@ -16,7 +16,8 @@ from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
 from opinion_aggregator.dao.survey import (
     get_surveys, get_survey_parts, get_user_responses,
-    get_total_responders, get_question_responses, get_question_options, get_popularity, get_unique_responses)
+    get_total_responders, get_question_responses, get_question_options,
+    get_popularity, get_unique_responses, get_sub_categories_count)
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -251,7 +252,7 @@ def view_personal_responses(request):
     }
     return render(request, 'user_responses.html', context)
 
-def get_chart_data(request):
+def get_pie_chart_data(request):
     """get chart data
 
     Arguments:
@@ -265,7 +266,9 @@ def get_chart_data(request):
     response = {}
     for data_object in data:
         if data_object.sub_categories.count():
-            response[str(data_object)] = data_object.sub_categories.count()
+            response[str(data_object)] = get_sub_categories_count(
+                data_object.sub_categories.all(),
+                data_object.sub_categories.count())
     return JsonResponse(response)
 
 
