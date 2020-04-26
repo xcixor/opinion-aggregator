@@ -58,11 +58,11 @@
                 <div class="row analytic-cards">
                     {% for question in section.questions.all %}
 
-                    {% if question.description == "what major you willing to apply?" %}
+                    {% if question.description == "What major/specialization would you study later on?" %}
                     <input type="hidden" name="question" value="{{ question }}" id="major">
                     <div class="card">
                     <span class="card-title">Top Five Main majors</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                     <div id="majorBarChart">
                         <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
@@ -74,7 +74,7 @@
                     <input type="hidden" name="question" value="{{ question }}" id="hobby">
                     <div class="card">
                     <span class="card-title">Top Five Major hobbies</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                     <div id="hobbyBarChart">
                         <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
@@ -86,7 +86,7 @@
                     <input type="hidden" name="question" value="{{ question }}" id="skills">
                     <div class="card">
                     <span class="card-title">Skills Popularity</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                         <div id="skillsPieChart">
                             <i class="fas fa-spinner fa-pulse green-text"></i>
                         </div>
@@ -98,7 +98,7 @@
                     <input type="hidden" name="question" value="{{ question }}" id="jobs">
                     <div class="card">
                     <span class="card-title">Job Popularity</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                         <div id="jobsPieChart">
                             <i class="fas fa-spinner fa-pulse green-text"></i>
                         </div>
@@ -119,29 +119,25 @@
                 <div class="row analytic-cards">
                     {% for question in section.questions.all %}
 
-                    {% if question.description == "Are you a leader?" %}
+                    {% if question.description == "Would you like to be a leader or manager in the future?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="leadership">
                     <div class="card">
                         <span class="card-title">Youth who consider themselves leaders</span>
-                        <div class="card-content">
-                            <p>
-                                <p class="number">Leaders <span class="red-text">{{ question|get_leadership_yes_responses }}</span></p>
-                            </p>
-                            <p>
-                                <p class="number">Not Leaders <span class="red-text">{{ question|get_leadership_no_responses }}</span></p>
-                            </p>
+                        <div class="card-content center">
+                            <div id="leadershipPieChart">
+                                <i class="fas fa-spinner fa-pulse green-text"></i>
+                            </div>
                         </div>
                     </div>
                     {% endif %}
                     {% if question.description == "what do u plan on doing in the future?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="businessLeadership">
                     <div class="card">
                         <span class="card-title">Business Leadership</span>
-                        <div class="card-content">
-                            <p>
-                                <p class="number">Entreprenuers <span class="red-text">{{ question|get_business_responses }}</span></p>
-                            </p>
-                            <p>
-                                <p class="number">Workers <span class="red-text">{{ question|get_salary_count }}</span></p>
-                            </p>
+                        <div class="card-content center">
+                            <div id="businessLeadershipPieChart">
+                                <i class="fas fa-spinner fa-pulse green-text"></i>
+                            </div>
                         </div>
                     </div>
                     {% endif %}
@@ -164,7 +160,7 @@
                     <input type="hidden" name="question" value="{{ question }}" id="neededJobs">
                     <div class="card">
                     <span class="card-title">Top 5 Most Needed jobs</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                     <div id="neededJobsBarChart">
                         <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
@@ -175,7 +171,7 @@
                     <input type="hidden" name="question" value="{{ question }}" id="unneededJobs">
                     <div class="card">
                     <span class="card-title">Top 5 Least Needed jobs</span>
-                    <div class="card-content">
+                    <div class="card-content center">
                     <div id="unneededJobsBarChart">
                         <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
@@ -197,14 +193,17 @@
                 <div class="row analytic-cards">
                     {% for question in section.questions.all %}
 
+                    {% if question.description == "Which industry are willing to work in?" %}
+                    <input type="hidden" name="question" value="{{ question }}" id="industry">
                     <div class="card">
-                        <span class="card-title">Industry Popularity</span>
-                        <div class="card-content">
-                    {% for response in question.responses.all|get_unique_responses:"5" %}
-                    <p>{{response}}: <span class="red-text">{{ response|get_popularity }}</span></p>
-                    {% endfor %}
-                        </div>
+                    <span class="card-title">Top 5 Least Needed jobs</span>
+                    <div class="card-content center">
+                    <div id="industryBarChart">
+                        <i class="fas fa-spinner fa-pulse green-text"></i>
                     </div>
+                    </div>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
