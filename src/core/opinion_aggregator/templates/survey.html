@@ -42,10 +42,10 @@
                             <div class="row questions">
                                 <div class="question">
                                     <div class="col s12">
-                                        <p>{{ question.description }}</p>
+                                        <p class="big-text">{{ question.description }}</p>
                                         {% if question.open_ended %}
                                             {% if  question.options.all %}
-                                                <h4>Please select at most {{ question.expected_answers }} choices</h4>
+                                                <p class="medium-text">Please select at most {{ question.expected_answers }} choices</p>
                                                 {% for option in question.options.all %}
                                                     {% if option.has_sub_category %}
                                                         {% for category in option.sub_categories.all %}
@@ -61,7 +61,16 @@
                                                         </div>
                                                         {% endfor %}
                                                     {% else %}
-                                                    <p>error</p>
+                                                    <div class="row"><br>
+                                                        <div class="col s12 m6">
+                                                        <p>
+                                                        <label>
+                                                            <input name="{{ question.pk }}" type="checkbox" value="{{ option }}"/>
+                                                            <span>{{ option }}</span>
+                                                            </label>
+                                                        </p>
+                                                        </div>
+                                                    </div>
                                                     {% endif %}
                                                 {% endfor %}
                                             {% else %}
@@ -100,6 +109,14 @@
                                         </p>
                                         {% endif %}
                                         {% endfor %}
+                                        <!-- <div class="row"><br>
+                                            <div class="col s12 m6">
+                                                <div class="input-field">
+                                                    <input type="text" name="{{question.pk}}" id="{{question.pk}}">
+                                                    <label for="{{question.pk}}">Other</label>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                         {% else %}
                                         <div class="row">
                                             <div class="col s12">

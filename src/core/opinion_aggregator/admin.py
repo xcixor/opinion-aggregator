@@ -25,18 +25,25 @@ class OptionModelInline(NestedStackedInline):
     extra = 0
 
 
-class QuestionModelAdmin(NestedModelAdmin):
-    model = survey.QuestionModel
-    inlines = [OptionModelInline]
+class OptionsModelInline(admin.StackedInline):
+    model = survey.QuestionOptions
+    show_change_link = True
+    extra = 0
 
+# class QuestionModelAdmin(NestedModelAdmin):
+#     model = survey.QuestionModel
+#     inlines = [OptionModelInline]
+
+class QuestionModelAdmin(admin.ModelAdmin):
+    inlines = [OptionsModelInline]
 
 admin.site.register(User)
 admin.site.register(survey.OptionModel)
+# admin.site.register(survey.QuestionModel, QuestionModelAdmin)
 admin.site.register(survey.QuestionModel, QuestionModelAdmin)
-# admin.site.register(QuestionModelAdmin)
 admin.site.register(survey.PartModel)
 admin.site.register(survey.SectionModel)
 admin.site.register(survey.SurveyModel)
 admin.site.register(survey.SurveyResponsesModel, ResponsesAdmin)
-# admin.site.register(survey.QuestionOptions, QuestionOptionsModelAdmin)
+admin.site.register(survey.QuestionOptions, QuestionOptionsModelAdmin)
 admin.site.register(survey.OptionSubCategory)
