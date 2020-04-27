@@ -287,3 +287,9 @@ def get_bar_chart_data(request):
         for data_object in unique_data:
             response[data_object] = get_popularity(data_object)
     return JsonResponse(response)
+
+
+def mission(request):
+    """render the mission and vision page.
+    """
+    return render(request, "mission.html")

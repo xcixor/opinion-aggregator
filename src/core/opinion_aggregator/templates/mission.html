@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mission.css' %}" />
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Aim</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 mission">
+                    <p>
+                        Our idea is to create an online system that can help the governments in united Arab emirates to study the new generation
+                        and study the personality types of young people to understand their attitudes, ideas, and beliefs,
+                        skills. The result of this project can help the government to know what the new generation is good at,
+                        what it likes, what it wants to be in the future, jobs its likely to engage in and its dislikes.<br><br>
+                        The main idea of this project is to help the government predict how the next generations will be and what
+                        jobs will be in demand and which ones will not.
+                        This can help the governments to plan for, and implement policies that will be beneficial to this generation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
