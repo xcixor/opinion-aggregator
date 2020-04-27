@@ -84,9 +84,7 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons green-text">menu</i></a>
             <div class="nav-wrapper hide-on-med-and-down">
                 <ul class="right hide-on-med-and-down">
-                    {% if request.user.is_authenticated %}
-                    <li class="username"><a href="/profile" class="green-text">Welcome {{request.user.lastname}}</a></li>
-                    {% endif %}
+                    <li class="username"><a href="/mission" class="green-text">Our Mission</a></li>
                     <li><a href="/survey" class="green-text">Survey</a></li>
                     <li><a href="/analytics" class="green-text">Analytics</a></li>
                     <li><a href="/contact" class="green-text">Your Voice</a></li>
@@ -111,9 +109,7 @@
               </form>
         </li>
         <li><a href="/" class="green-text">Home</a></li>
-        {% if request.user.is_authenticated %}
-        <li class="username"><a href="/profile" class="green-text">Welcome {{request.user.lastname}}</a></li>
-        {% endif %}
+        <li class="username"><a href="/mission" class="green-text">Our Mission</a></li>
         <li><a href="/survey" class="green-text">Survey</a></li>
         <li><a href="/analytics" class="green-text">Analytics</a></li>
         <li><a href="/contact" class="green-text">Your Voice</a></li>
