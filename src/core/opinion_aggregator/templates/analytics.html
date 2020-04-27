@@ -156,7 +156,7 @@
                 <div class="row analytic-cards">
                     {% for question in section.questions.all %}
 
-                    {% if question.description == "What top five jobs you think we need in the labor market?" %}
+                    {% if question.description == "What top five jobs you think we need more, in the labor market  in the future? (select just five)" %}
                     <input type="hidden" name="question" value="{{ question }}" id="neededJobs">
                     <div class="card">
                     <span class="card-title">Top 5 Most Needed jobs</span>
@@ -196,7 +196,7 @@
                     {% if question.description == "Which industry are willing to work in?" %}
                     <input type="hidden" name="question" value="{{ question }}" id="industry">
                     <div class="card">
-                    <span class="card-title">Top 5 Least Needed jobs</span>
+                    <span class="card-title">Industry Popularity</span>
                     <div class="card-content center">
                     <div id="industryBarChart">
                         <i class="fas fa-spinner fa-pulse green-text"></i>
