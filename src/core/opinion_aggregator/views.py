@@ -266,12 +266,12 @@ def get_pie_chart_data(request):
     response = {}
     if data:
         for data_object in data:
-            if data_object.sub_categories.count():
+            if data_object.sub_categories:
                 response[str(data_object)] = get_sub_categories_count(
                     data_object.sub_categories.all(),
                     data_object.sub_categories.count())
-            else:
-                return get_bar_chart_data(request)
+            # else:
+            #     return get_bar_chart_data(request)
     return JsonResponse(response)
 
 

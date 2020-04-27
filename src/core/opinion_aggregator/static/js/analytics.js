@@ -49,7 +49,7 @@ $('#hobbyBarChart').ready(function(){
 
 $('#industryBarChart').ready(function(){
     // fetch data from db
-    $.getJSON("/get_pie_chart_data", {'question': $('#industry').val()}, function(j) {
+    $.getJSON("/get_bar_chart_data", {'question': $('#industry').val()}, function(j) {
         google.charts.setOnLoadCallback(function () {
             var categories = [];
             for(key in j){
@@ -64,7 +64,7 @@ $('#industryBarChart').ready(function(){
 
 $('#leadershipPieChart').ready(function(){
     // fetch data from db
-    $.getJSON("/get_pie_chart_data", {'question': $('#leadership').val()}, function(j) {
+    $.getJSON("/get_bar_chart_data", {'question': $('#leadership').val()}, function(j) {
         google.charts.setOnLoadCallback(function () {
             var categories = [];
             for(key in j){
@@ -78,7 +78,7 @@ $('#leadershipPieChart').ready(function(){
 
 $('#businessLeadershipPieChart').ready(function(){
     // fetch data from db
-    $.getJSON("/get_pie_chart_data", {'question': $('#businessLeadership').val()}, function(j) {
+    $.getJSON("/get_bar_chart_data", {'question': $('#businessLeadership').val()}, function(j) {
         google.charts.setOnLoadCallback(function () {
             var categories = [];
             for(key in j){
