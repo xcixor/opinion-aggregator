@@ -115,6 +115,7 @@ class QuestionModel(models.Model):
         max_length=400,
         blank=False,
         null=False)
+
     section = models.ForeignKey(
         SectionModel, related_name='questions',
         on_delete=models.CASCADE,
@@ -127,10 +128,14 @@ class QuestionModel(models.Model):
 
     expected_answers = models.IntegerField(default=1)
 
+    position = models.IntegerField(null=True, blank=True, help_text=_(
+            'Designates the position a question should be in.'),
+        )
+
     class Meta:
         verbose_name_plural = "Questions"
         unique_together = ('description', 'section')
-        ordering = ('description',)
+        ordering = ('position',)
 
     def __str__(self):
         return self.description

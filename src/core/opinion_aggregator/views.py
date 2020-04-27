@@ -8,12 +8,16 @@ from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from opinion_aggregator.forms import UserRegistrationForm, LoginForm, EditProfileForm
 from opinion_aggregator.utils import send_email
 from opinion_aggregator.token import account_activation_token
 from opinion_aggregator.models import User, QuestionModel, SurveyResponsesModel
 from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_survey_sections
-from opinion_aggregator.dao.survey import get_surveys, get_survey_parts, get_user_responses, get_total_responders
+from opinion_aggregator.dao.survey import (
+    get_surveys, get_survey_parts, get_user_responses,
+    get_total_responders, get_question_responses, get_question_options,
+    get_popularity, get_unique_responses, get_sub_categories_count)
 from opinion_aggregator.utils.email import send_email
 from opinion_aggregator.utils import create_service_account
 
@@ -247,3 +251,41 @@ def view_personal_responses(request):
         'responses': responses
     }
     return render(request, 'user_responses.html', context)
+
+def get_pie_chart_data(request):
+    """get chart data
+
+    Arguments:
+        request {[type]} -- [description]
+    """
+    try:
+        question = request.GET["question"]
+    except:
+        return JsonResponse({})
+    data = get_question_options(question.strip())
+    response = {}
+    if data:
+        for data_object in data:
+            if data_object.sub_categories.count():
+                response[str(data_object)] = get_sub_categories_count(
+                    data_object.sub_categories.all(),
+                    data_object.sub_categories.count())
+            else:
+                return get_bar_chart_data(request)
+    return JsonResponse(response)
+
+
+def get_bar_chart_data(request):
+    """get bar chart data
+    """
+    try:
+        question = request.GET["question"]
+    except:
+        return JsonResponse({})
+    data = get_question_responses(question.strip())
+    response = {}
+    if data:
+        unique_data = get_unique_responses(data, 5)
+        for data_object in unique_data:
+            response[data_object] = get_popularity(data_object)
+    return JsonResponse(response)

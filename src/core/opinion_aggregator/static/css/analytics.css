@@ -51,7 +51,7 @@ a .fas {
 }
 
 .card{
-    flex-basis: 30%;
+    flex-basis: 48%;
 }
 
 .card-title {
@@ -60,7 +60,6 @@ a .fas {
 
 .card-content {
     overflow-y: scroll;
-    height: 200px;
     font-size: 1.2em;
 }
 
@@ -119,5 +118,14 @@ a .fas {
     h2 {
         font-size: 2rem !important;
         margin: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .analytic {
+        margin-left: 0 !important;
+    }
+    .card {
+        flex-basis: 48%;
     }
 }
